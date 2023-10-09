@@ -15,4 +15,9 @@ public class WanderingAI : MonoBehaviour
     {
         
     }
+
+    Vector2 RandomWanderPoint()
+    {
+        return Vector2.up;
+    }
 }
