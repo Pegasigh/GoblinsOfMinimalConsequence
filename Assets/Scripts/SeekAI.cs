@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class SeekAI : MonoBehaviour
 {
+
     Body bodyScript;
     public Transform target;
-
     // Start is called before the first frame update
     void Start()
     {
-        bodyScript = GetComponent<Body>();
+         bodyScript = GetComponent<Body>();
     }
 
     // Update is called once per frame
