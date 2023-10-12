@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 
 public class WanderingAI : MonoBehaviour
@@ -22,11 +23,6 @@ public class WanderingAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SteeringOutput result;
-
-
-
-        bodyScript.ApplyForce(result);
     }
 
     Vector2 RandomWanderPoint()
