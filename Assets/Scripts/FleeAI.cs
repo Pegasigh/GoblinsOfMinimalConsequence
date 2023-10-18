@@ -45,7 +45,7 @@ public class FleeAI : MonoBehaviour
 
             result.angularAcceleration = 0; // You can change this if needed
 
-            bodyScript.ApplyForce(result);
+            bodyScript.AddForce(result);
         }
     }
 

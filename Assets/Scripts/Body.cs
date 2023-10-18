@@ -46,7 +46,7 @@ public class Body : MonoBehaviour
         linearAcceleration = Vector2.zero;
     }
 
-    public void ApplyForce(SteeringOutput steering)
+    public void AddForce(SteeringOutput steering)
     {
         linearAcceleration += steering.linearAcceleration;
         angularAcceleration += steering.angularAcceleration;

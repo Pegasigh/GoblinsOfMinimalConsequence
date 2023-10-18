@@ -23,6 +23,6 @@ public class SeekAI : MonoBehaviour
 
         result.angularAcceleration = 0; //can change if we want goblins to face towards target, must then do some other things
 
-        bodyScript.ApplyForce(result);
+        bodyScript.AddForce(result);
     }
 }

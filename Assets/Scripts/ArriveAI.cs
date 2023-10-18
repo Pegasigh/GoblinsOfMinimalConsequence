@@ -6,7 +6,7 @@ public class ArriveAI : MonoBehaviour
 {
     public float innerRadius;
     public float outerRadius;
-    public float accelerationFactor = 0.1f;
+    public float timeToTarget = 0.1f;
     public float maxAcceleration = 100;
 
     Body bodyScript;
@@ -49,7 +49,7 @@ public class ArriveAI : MonoBehaviour
             targetVelocity *= targetSpeed;
 
             steering.linearAcceleration = targetVelocity - bodyScript.linearVelocity;
-            steering.linearAcceleration /= accelerationFactor;
+            steering.linearAcceleration /= timeToTarget;
 
             //clipping acceleration
             if(steering.linearAcceleration.magnitude > maxAcceleration)
@@ -60,6 +60,6 @@ public class ArriveAI : MonoBehaviour
         }
 
         steering.angularAcceleration = 0;
-        bodyScript.ApplyForce(steering);
+        bodyScript.AddForce(steering);
     }
 }
