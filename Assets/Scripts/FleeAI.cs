@@ -4,27 +4,66 @@ using UnityEngine;
 
 public class FleeAI : MonoBehaviour
 {
-    
     Body bodyScript;
     public Transform target;
-    // Start is called before the first frame update
+    public float fleeRadius = 5.0f;
+    public float maxSpeed = 10.0f; 
+    public float decel = 0.1f; // Speed to slow down to when not fleeing
+
+    private bool isFleeing = false;
+
+    // first framerino
     void Start()
     {
-         bodyScript = GetComponent<Body>();
+        bodyScript = GetComponent<Body>();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        SteeringOutput result;
-        result.linearAcceleration = transform.position - target.position;
-        result.linearAcceleration.Normalize();
-        result.linearAcceleration *= bodyScript.maxSpeed;
+        float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
-        result.angularAcceleration = 0; //can change if we want goblins to face towards target, must then do some other things
+        if (distanceToTarget < fleeRadius)
+        {
+            // If within the fleeRadius, start fleeing
+            StartFleeing();
+        }
+        else if (isFleeing)
+        {
+            // If Its not in the radius. Slow down, then turn off Fleeing. 
+            SlowDown();
+            isFleeing = false;
+        }
 
-        bodyScript.ApplyForce(result);
+        if (isFleeing)
+        {
+            // Flee behavior
+            SteeringOutput result;
+            result.linearAcceleration = transform.position - target.position;
+            result.linearAcceleration.Normalize();
+            result.linearAcceleration *= maxSpeed;
+
+            result.angularAcceleration = 0; // You can change this if needed
+
+            bodyScript.ApplyForce(result);
+        }
+    }
+
+    // Call this thingy to start fleeing
+    public void StartFleeing()
+    {
+        isFleeing = true;
+    }
+
+    // function to slow down to a stop when not fleeing
+    private void SlowDown()
+    {
+        Vector3 velocity = bodyScript.linearVelocity;
+        if (velocity.magnitude > decel)
+        {
+            velocity = Vector3.Lerp(velocity, Vector3.zero, Time.deltaTime);
+
+        }
+
     }
 }
-
-
