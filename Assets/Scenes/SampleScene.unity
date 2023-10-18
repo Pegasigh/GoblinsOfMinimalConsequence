@@ -224,11 +224,6 @@ MonoBehaviour:
   fleeRadius: 10
   maxSpeed: 10
   decel: 0.1
---- !u!4 &5912743 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1932449462504837019, guid: 18f5f5c258525114486cee9f864b55e5, type: 3}
-  m_PrefabInstance: {fileID: 5912737}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &145861806 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3307243352896202013, guid: 41f4864bff7d8d641a4ae7634d260c7e, type: 3}
@@ -360,7 +355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb0738f036af96b43959bd5bfe59a847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 5912743}
+  target: {fileID: 145861807}
   fleeRadius: 5
   maxSpeed: 10
   decel: 0.1
@@ -486,7 +481,7 @@ PrefabInstance:
       objectReference: {fileID: 1646332519}
     - target: {fileID: 1932449462504837019, guid: 98007e8e078087f4e95c686d502dcd41, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.15
+      value: 2.42
       objectReference: {fileID: 0}
     - target: {fileID: 1932449462504837019, guid: 98007e8e078087f4e95c686d502dcd41, type: 3}
       propertyPath: m_LocalPosition.y
@@ -580,7 +575,7 @@ Transform:
   m_GameObject: {fileID: 1646332517}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.15, y: 0.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
