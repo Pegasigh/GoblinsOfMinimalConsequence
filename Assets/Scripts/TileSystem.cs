@@ -83,9 +83,6 @@ public class TileSystem : MonoBehaviour
         }
     }
 
-  
-
-
     private void OnDrawGizmos()
     {
         //if(NavigationMap == null)
@@ -98,7 +95,5 @@ public class TileSystem : MonoBehaviour
         //{
         //    Gizmos.DrawLine((pos + new Vector2(0.5f, 0.5f)), (edgeNode + new Vector2(0.5f, 0.5f)));
         //}
-
-
     }
 }
