@@ -41,7 +41,7 @@ public class Astar : MonoBehaviour
     
     void Update()
     {
-        //checking mouse click
+        //checking mouse click to set start and goal Pos
         if(Input.GetMouseButtonDown(0))
         {
             RaycastHit2D hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, layerMask);
@@ -108,10 +108,10 @@ public class Astar : MonoBehaviour
                 }
             }
         }
-
         return neighbours;
     }
 
+    //TODO avoid already added Nodes
     private void ExamineNeighbours(List<Node> neighbours, Node current)
     {
         for(int i = 0; i < neighbours.Count; i++)

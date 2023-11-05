@@ -49,6 +49,7 @@ public class AstarDebugger : MonoBehaviour
         ColourTile(goal, goalColour);
     }
 
+    //colours the tiles for visual only at the moment
     public void ColourTile(Vector3Int pos, Color colour) 
     {
         tilemap.SetTile(pos, tile);
