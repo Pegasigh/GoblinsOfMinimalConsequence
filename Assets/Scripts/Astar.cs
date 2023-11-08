@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -32,6 +33,8 @@ public class Astar : MonoBehaviour
     private LayerMask layerMask;
 
     private Vector3Int startPos, goalPos;
+
+    private Stack<Vector3Int> path;
 
     private HashSet<Node> openList;
     private HashSet<Node> closedList;
@@ -82,13 +85,20 @@ public class Astar : MonoBehaviour
         if (current == null)
             Initialize();
 
-        List<Node> neighbours = FindNeighbours(current.Position);
+        while(openList.Count > 0 && path == null)
+        {
+            
 
-        ExamineNeighbours(neighbours, current);
+            
+            List<Node> neighbours = FindNeighbours(current.Position);
 
-        UpdateCurrentTile(ref current);
+            ExamineNeighbours(neighbours, current);
 
-        AstarDebugger.MyInstance.CreateTiles(openList, closedList, startPos, goalPos);
+            UpdateCurrentTile(ref current);
+
+            path = GeneratePath(current);
+        }
+        AstarDebugger.MyInstance.CreateTiles(openList, closedList, startPos, goalPos, path);
     }
 
     private List<Node> FindNeighbours(Vector3Int parentPos)
@@ -104,7 +114,7 @@ public class Astar : MonoBehaviour
                 if (y != 0 || x != 0)
                 {
                     //TODO figure out a way to make sure tiles are actually existing so we can see debug visuals
-                    if (neighborPos != startPos) //&& !waterTiles.Contains(neighborPos) && tilemap.GetTile(neighborPos))
+                    if (neighborPos != startPos && tilemap.GetTile(neighborPos)) //&& !waterTiles.Contains(neighborPos))
                     {
                         Node neighbor = GetNode(neighborPos);
                         neighbours.Add(neighbor);
@@ -121,11 +131,22 @@ public class Astar : MonoBehaviour
     {
         for (int i = 0; i < neighbours.Count; i++)
         {
-            openList.Add(neighbours[i]);
-
+            Node neighbour = neighbours[i];
             int gScore = DetermineGScore(neighbours[i].Position, current.Position);
 
-            CalcValues(current, neighbours[i], 0);
+            if (openList.Contains(neighbour)) 
+            {
+                if(current.G + gScore < neighbour.G)
+                {
+                    CalcValues(current, neighbour, gScore);
+                }
+            }
+            else if(!closedList.Contains(neighbour))
+            {
+                CalcValues(current, neighbour, gScore);
+
+                openList.Add(neighbour);
+            }
         }
     }
 
@@ -137,7 +158,7 @@ public class Astar : MonoBehaviour
 
         neighbor.H = (Mathf.Abs(neighbor.Position.x - goalPos.x) + Mathf.Abs(neighbor.Position.y - goalPos.y) * 10);
         
-        neighbor.f = neighbor.G + neighbor.H;
+        neighbor.F = neighbor.G + neighbor.H;
     }
 
     private int DetermineGScore(Vector3Int neighbour, Vector3Int current)
@@ -164,6 +185,11 @@ public class Astar : MonoBehaviour
         openList.Remove(current);
 
         closedList.Add(current);
+
+        if (openList.Count > 0)
+        {
+            current = openList.OrderBy(x => x.F).First();
+        }
     }
 
     //creating Nodes if not in the list
@@ -193,6 +219,23 @@ public class Astar : MonoBehaviour
         { 
             goalPos = clickPos;
         }
+    }
+
+    private Stack<Vector3Int> GeneratePath(Node current)
+    {
+        if(current.Position == goalPos)
+        {
+            Stack<Vector3Int> finalPath = new Stack<Vector3Int>();
+
+            while(current.Position != startPos)
+            {
+                finalPath.Push(current.Position);
+
+                current = current.Parent;
+            }
+            return finalPath;
+        }
+        return null;
     }
 
 }

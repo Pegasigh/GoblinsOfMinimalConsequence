@@ -38,7 +38,7 @@ public class AstarDebugger : MonoBehaviour
 
     private List<GameObject> debugObjects = new List<GameObject>();
 
-    public void CreateTiles(HashSet<Node> openList, HashSet<Node> closedList, Vector3Int start, Vector3Int goal)
+    public void CreateTiles(HashSet<Node> openList, HashSet<Node> closedList, Vector3Int start, Vector3Int goal, Stack<Vector3Int> path = null)
     {
         foreach(Node node in openList)
         {
@@ -50,7 +50,19 @@ public class AstarDebugger : MonoBehaviour
             ColourTile(node.Position, closedColour);
         }
 
-        //ColourTile(start, startColour);
+        //colouring the path
+        if(path != null)
+        {
+            foreach(Vector3Int pos in path)
+            {
+                if(pos != start && pos != goal)
+                {
+                    ColourTile(pos, pathColour);
+                }
+            }
+        }
+        //colouring start and end pos after colouring everything else
+        ColourTile(start, startColour);
         ColourTile(goal, goalColour);
     }
 
