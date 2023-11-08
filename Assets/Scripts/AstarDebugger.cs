@@ -38,14 +38,19 @@ public class AstarDebugger : MonoBehaviour
 
     private List<GameObject> debugObjects = new List<GameObject>();
 
-    public void CreateTiles(HashSet<Node> openList, Vector3Int start, Vector3Int goal)
+    public void CreateTiles(HashSet<Node> openList, HashSet<Node> closedList, Vector3Int start, Vector3Int goal)
     {
         foreach(Node node in openList)
         {
             ColourTile(node.Position, openColour);
         }
+        
+        foreach(Node node in closedList)
+        {
+            ColourTile(node.Position, closedColour);
+        }
 
-        ColourTile(start, startColour);
+        //ColourTile(start, startColour);
         ColourTile(goal, goalColour);
     }
 
