@@ -42,6 +42,9 @@ public class Astar : MonoBehaviour
     private Node current;
     private Dictionary<Vector3Int, Node> allNodes = new Dictionary<Vector3Int, Node>();
 
+    //SD
+    Tilemap NavigationMap;
+
 
     void Update()
     {
@@ -78,6 +81,9 @@ public class Astar : MonoBehaviour
 
         //Adding starting node to the open list
         openList.Add(current);
+
+        //SD
+        NavigationMap = GameObject.FindWithTag("NavigationMap").GetComponent<Tilemap>();
     }
 
     private void Algorithm()
@@ -104,25 +110,119 @@ public class Astar : MonoBehaviour
     private List<Node> FindNeighbours(Vector3Int parentPos)
     {
         List<Node> neighbours = new List<Node>();
+        Vector3Int neighborPos;
 
-        for (int x = -1; x <= 1; x++)
+
+
+        //for (int x = -1; x <= 1; x++)
+        //{
+        //    for (int y = -1; y <= 1; y++)
+        //    {
+        //        neighborPos = new Vector3Int(parentPos.x - x, parentPos.y - y, parentPos.z);
+
+        //        if (y != 0 || x != 0)
+        //        {
+        //            TODO figure out a way to make sure tiles are actually existing so we can see debug visuals
+        //            if (neighborPos != startPos && tilemap.GetTile(neighborPos)) //&& !waterTiles.Contains(neighborPos))
+        //            {
+        //                Node neighbor = GetNode(neighborPos);
+        //                neighbours.Add(neighbor);
+        //            }
+
+        //        }
+        //    }
+        //}
+
+
+
+        /***************************************
+            checking for adjacent free tiles
+        ***************************************/
+
+        neighborPos = parentPos + Vector3Int.right;
+        if (!NavigationMap.GetTile(neighborPos))
         {
-            for (int y = -1; y <= 1; y++)
+            if (neighborPos != startPos && tilemap.GetTile(neighborPos))
             {
-                Vector3Int neighborPos = new Vector3Int(parentPos.x - x, parentPos.y - y, parentPos.z);
-
-                if (y != 0 || x != 0)
-                {
-                    //TODO figure out a way to make sure tiles are actually existing so we can see debug visuals
-                    if (neighborPos != startPos && tilemap.GetTile(neighborPos)) //&& !waterTiles.Contains(neighborPos))
-                    {
-                        Node neighbor = GetNode(neighborPos);
-                        neighbours.Add(neighbor);
-                    }
-
-                }
+                Node neighbor = GetNode(neighborPos);
+                neighbours.Add(neighbor);
             }
         }
+
+        neighborPos = parentPos + Vector3Int.left;
+        if (!NavigationMap.GetTile(neighborPos))
+        {
+            if (neighborPos != startPos && tilemap.GetTile(neighborPos))
+            {
+                Node neighbor = GetNode(neighborPos);
+                neighbours.Add(neighbor);
+            }
+        }
+
+        neighborPos = parentPos + Vector3Int.up;
+        if (!NavigationMap.GetTile(neighborPos))
+        {
+            if (neighborPos != startPos && tilemap.GetTile(neighborPos))
+            {
+                Node neighbor = GetNode(neighborPos);
+                neighbours.Add(neighbor);
+            }
+        }
+
+        neighborPos = parentPos + Vector3Int.down;
+        if (!NavigationMap.GetTile(neighborPos))
+        {
+            if (neighborPos != startPos && tilemap.GetTile(neighborPos))
+            {
+                Node neighbor = GetNode(neighborPos);
+                neighbours.Add(neighbor);
+            }
+        }
+
+        /***************************************
+            checking for diagonal free tiles
+        ***************************************/
+
+        //bl
+        neighborPos = parentPos + Vector3Int.down + Vector3Int.left;
+        if (!NavigationMap.GetTile(parentPos + Vector3Int.left) &&
+            !NavigationMap.GetTile(parentPos + Vector3Int.down) &&
+            !NavigationMap.GetTile(neighborPos))
+        {
+            Node neighbor = GetNode(neighborPos);
+            neighbours.Add(neighbor);
+        }
+
+        //br
+        neighborPos = parentPos + Vector3Int.down + Vector3Int.right;
+        if (!NavigationMap.GetTile(parentPos + Vector3Int.right) &&
+            !NavigationMap.GetTile(parentPos + Vector3Int.down) &&
+            !NavigationMap.GetTile(neighborPos))
+        {
+            Node neighbor = GetNode(neighborPos);
+            neighbours.Add(neighbor);
+        }
+
+        //tl
+        neighborPos = parentPos + Vector3Int.up + Vector3Int.left;
+        if (!NavigationMap.GetTile(parentPos + Vector3Int.left) &&
+            !NavigationMap.GetTile(parentPos + Vector3Int.up) &&
+            !NavigationMap.GetTile(neighborPos))
+        {
+            Node neighbor = GetNode(neighborPos);
+            neighbours.Add(neighbor);
+        }
+
+        //tr
+        neighborPos = parentPos + Vector3Int.up + Vector3Int.right;
+        if (!NavigationMap.GetTile(parentPos + Vector3Int.right) &&
+            !NavigationMap.GetTile(parentPos + Vector3Int.up) &&
+            !NavigationMap.GetTile(neighborPos))
+        {
+            Node neighbor = GetNode(neighborPos);
+            neighbours.Add(neighbor);
+        }
+
         return neighbours;
     }
 

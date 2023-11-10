@@ -37,7 +37,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Navigation Map Layer
   m_SortingLayers:
   - name: Default
     uniqueID: 0
