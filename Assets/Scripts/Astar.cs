@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 
-public enum TileType { START, END, PATH, BUILDING, WATER}
+public enum TileType {START, END, PATH, BUILDING, WATER}
 
 public class Astar : MonoBehaviour
 {
@@ -26,6 +26,7 @@ public class Astar : MonoBehaviour
     [SerializeField]
     private RuleTile grass;
 
+    //ONLY HERE FOR TESTING
     [SerializeField]
     private Camera cam;
 
@@ -86,16 +87,13 @@ public class Astar : MonoBehaviour
         NavigationMap = GameObject.FindWithTag("NavigationMap").GetComponent<Tilemap>();
     }
 
-    private void Algorithm()
+    public void Algorithm()
     {
         if (current == null)
             Initialize();
 
         while(openList.Count > 0 && path == null)
         {
-            
-
-            
             List<Node> neighbours = FindNeighbours(current.Position);
 
             ExamineNeighbours(neighbours, current);
@@ -104,7 +102,25 @@ public class Astar : MonoBehaviour
 
             path = GeneratePath(current);
         }
+
         AstarDebugger.MyInstance.CreateTiles(openList, closedList, startPos, goalPos, path);
+    }
+
+    public void Algorithm(Node current, Node target)
+    {
+        if (current == null)
+            Initialize();
+
+        while (openList.Count > 0 && path == null)
+        {
+            List<Node> neighbours = FindNeighbours(current.Position);
+
+            ExamineNeighbours(neighbours, current);
+
+            UpdateCurrentTile(ref current);
+
+            path = GeneratePath(current, target);
+        }
     }
 
     private List<Node> FindNeighbours(Vector3Int parentPos)
@@ -183,7 +199,7 @@ public class Astar : MonoBehaviour
             checking for diagonal free tiles
         ***************************************/
 
-        //bl
+        //bottom left
         neighborPos = parentPos + Vector3Int.down + Vector3Int.left;
         if (!NavigationMap.GetTile(parentPos + Vector3Int.left) &&
             !NavigationMap.GetTile(parentPos + Vector3Int.down) &&
@@ -193,7 +209,7 @@ public class Astar : MonoBehaviour
             neighbours.Add(neighbor);
         }
 
-        //br
+        //bottom right
         neighborPos = parentPos + Vector3Int.down + Vector3Int.right;
         if (!NavigationMap.GetTile(parentPos + Vector3Int.right) &&
             !NavigationMap.GetTile(parentPos + Vector3Int.down) &&
@@ -203,7 +219,7 @@ public class Astar : MonoBehaviour
             neighbours.Add(neighbor);
         }
 
-        //tl
+        //top left
         neighborPos = parentPos + Vector3Int.up + Vector3Int.left;
         if (!NavigationMap.GetTile(parentPos + Vector3Int.left) &&
             !NavigationMap.GetTile(parentPos + Vector3Int.up) &&
@@ -213,7 +229,7 @@ public class Astar : MonoBehaviour
             neighbours.Add(neighbor);
         }
 
-        //tr
+        //top right
         neighborPos = parentPos + Vector3Int.up + Vector3Int.right;
         if (!NavigationMap.GetTile(parentPos + Vector3Int.right) &&
             !NavigationMap.GetTile(parentPos + Vector3Int.up) &&
@@ -328,6 +344,23 @@ public class Astar : MonoBehaviour
             Stack<Vector3Int> finalPath = new Stack<Vector3Int>();
 
             while(current.Position != startPos)
+            {
+                finalPath.Push(current.Position);
+
+                current = current.Parent;
+            }
+            return finalPath;
+        }
+        return null;
+    }
+
+    private Stack<Vector3Int> GeneratePath(Node current, Node target)
+    {
+        if (current.Position == target.Position)
+        {
+            Stack<Vector3Int> finalPath = new Stack<Vector3Int>();
+
+            while (current.Position != startPos)
             {
                 finalPath.Push(current.Position);
 
