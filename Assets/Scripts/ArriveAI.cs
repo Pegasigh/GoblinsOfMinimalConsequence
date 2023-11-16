@@ -62,4 +62,9 @@ public class ArriveAI : MonoBehaviour
         steering.angularAcceleration = 0;
         bodyScript.AddForce(steering);
     }
+
+    public void setTarget(Vector3 pos)
+    {
+        target.position = pos;
+    }
 }

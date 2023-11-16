@@ -34,15 +34,18 @@ public class ObstacleTiles : MonoBehaviour
     {
         //tell navigation map which tiles to free up
 
-        TileSystem navigationMap = GameObject.FindWithTag("NavigationMap").GetComponent<TileSystem>();
+        TileSystem navigationMap = GameObject.FindWithTag("NavigationMap")?.GetComponent<TileSystem>();
 
-        for (int x = (int)transform.position.x; x < (int)transform.position.x + width; x++)
+        if(navigationMap != null)
         {
-            for (int y = (int)transform.position.y; y < (int)transform.position.y + height; y++)
+            for (int x = (int)transform.position.x; x < (int)transform.position.x + width; x++)
             {
-                navigationMap.VacateTile(new Vector2Int(x, y));
+                for (int y = (int)transform.position.y; y < (int)transform.position.y + height; y++)
+                {
+                    navigationMap.VacateTile(new Vector2Int(x, y));
+                }
             }
-        }
+        }        
     }
 
     private void OnDrawGizmos()

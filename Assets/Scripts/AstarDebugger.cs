@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -17,6 +18,9 @@ public class AstarDebugger : MonoBehaviour
             return instance;
         }
     }
+
+    [SerializeField]
+    private Astar goblinToTrack;
 
     [SerializeField]
     private Grid grid;
@@ -38,8 +42,22 @@ public class AstarDebugger : MonoBehaviour
 
     private List<GameObject> debugObjects = new List<GameObject>();
 
+    private void Update()
+    {
+        //checking mouse click to only update debug visual when mouse is clicked
+        if (Input.GetMouseButtonDown(0))
+        {
+            Stack<Vector3Int> path = goblinToTrack.AStarAlgorithm(goblinToTrack.getStartPos(), goblinToTrack.getGoalPos(), out var openSet, out var closedSet);
+            CreateTiles(openSet, closedSet, goblinToTrack.getStartPos(), goblinToTrack.getGoalPos(), path);
+        }
+
+    }
+
     public void CreateTiles(HashSet<Node> openList, HashSet<Node> closedList, Vector3Int start, Vector3Int goal, Stack<Vector3Int> path = null)
     {
+        //destroy all old tiles
+        tilemap.ClearAllTiles();
+
         foreach(Node node in openList)
         {
             ColourTile(node.Position, openColour);

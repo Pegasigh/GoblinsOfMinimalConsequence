@@ -1,196 +1,206 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
 
 public enum TileType {START, END, PATH, BUILDING, WATER}
 
+[RequireComponent(typeof(SeekAI))]
 public class Astar : MonoBehaviour
 {
-    private int clickTimes = 0;
-
-    private TileType tileType;
-
     [SerializeField]
     private Tilemap tilemap;
 
-    [SerializeField]
-    private Tile[] tiles;
+    private Tilemap navigationMap;
+    private SeekAI seekAI;
+    private ArriveAI arriveAI;
 
-    [SerializeField]
-    private RuleTile water;
 
-    [SerializeField]
-    private RuleTile grass;
 
     //ONLY HERE FOR TESTING
     [SerializeField]
-    private Camera cam;
-
-    [SerializeField]
     private LayerMask layerMask;
 
-    private Vector3Int startPos, goalPos;
+
 
     private Stack<Vector3Int> path;
+       
+    private Vector3Int goalPos;
 
-    private HashSet<Node> openList;
-    private HashSet<Node> closedList;
-    private List<Vector3Int> waterTiles = new List<Vector3Int>();
-    private Node current;
-    private Dictionary<Vector3Int, Node> allNodes = new Dictionary<Vector3Int, Node>();
 
-    //SD
-    Tilemap NavigationMap;
 
+    private void Start()
+    {
+        //setting navigation map to be one in scene
+        navigationMap = GameObject.FindWithTag("NavigationMap").GetComponent<Tilemap>();
+
+        //grabbing it's own SeekAI and ArriveAI
+        seekAI = GetComponent<SeekAI>();
+        arriveAI = GetComponent<ArriveAI>();
+
+        //defaulting path to be empty
+        path = new Stack<Vector3Int>();
+
+        //setting camera
+
+    }
 
     void Update()
     {
         //checking mouse click to set start and goal Pos
         if (Input.GetMouseButtonDown(0))
         {
-            RaycastHit2D hit = Physics2D.Raycast(cam.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, layerMask);
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, layerMask);
 
             if (hit.collider != null)
             {
-                Vector3 mouseWorldPos = cam.ScreenToWorldPoint(Input.mousePosition);
+                Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector3Int clickPos = tilemap.WorldToCell(mouseWorldPos);
-                //function to set start and goal positions
-                ChangeTile(clickPos);
+
+                goalPos = clickPos;
+                path = AStarAlgorithm(getStartPos(), goalPos);
+            }
+        }
+
+        //actually move the goblin
+        moveActor();
+    }
+
+    private Stack<Vector3Int> AStarAlgorithm(Vector3Int startPos, Vector3Int goalPos)
+    {
+        return AStarAlgorithm(startPos, goalPos, out _, out _);
+    }
+
+    public Stack<Vector3Int> AStarAlgorithm(Vector3Int startPos, Vector3Int goalPos, out HashSet<Node> openSet, out HashSet<Node> closedSet)
+    {
+        Stack<Vector3Int> result = new Stack<Vector3Int>();
+        Dictionary<Vector3Int, Node> nodes = new(); //all the temp info about the nodes this algorithm has looked at or is going to look at
+
+        //defaulting closedSet to be empty
+        closedSet = new HashSet<Node>();
+
+        //adding first node to openset and dictionary
+        openSet = new HashSet<Node>();
+        openSet.Add(GetNode(startPos, nodes));
+
+        int iterations = 0;
+
+        //explores nodes until there are no more nodes left or end has been found
+        while (openSet.Count != 0)
+        {
+            //find node with lowest F score
+            Node current = openSet.First();
+            foreach (Node node in openSet)
+            {
+                if (current.F > node.F)
+                {
+                    current = node;
+                }
             }
 
+            //at end node, creates a path from start to end
+            if (current.Position == goalPos)
+            {
+                //construct a path
+                while (current.Position != startPos)
+                {
+                    result.Push(current.Position);
+                    current = current.Parent;
+
+                    //iterations++;
+                    //if (iterations > 1000)
+                    //{ break; }
+                }
+
+                return result;
+            }
+
+
+            //ensuring dictionary stores the shortest route between nodes and adds edges to openSet
+            foreach (Node neighbor in FindNeighbours(current.Position, nodes))
+            {
+                //tentative g score will replace g score if better
+                int tentativeG = current.G + FindEuclideanDistance(current.Position, neighbor.Position);
+                if (tentativeG < neighbor.G)
+                {
+                    neighbor.G = tentativeG;
+                    neighbor.F = tentativeG + FindEuclideanDistance(goalPos, neighbor.Position);
+                    neighbor.Parent = current;
+                    openSet.Add(neighbor); //only adds if not already in set
+                }
+            }
+
+            //already explored this node, now adding it to closedSet and removing it from openSet
+            closedSet.Add(current);
+            openSet.Remove(current);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //run visual Alg
-            Algorithm();
-        }
-
+        //no path found, basically just have goblin stay where he is
+        result.Push(startPos);
+        return result;
     }
 
-    private void Initialize()
+    private static Node GetNode(Vector3Int pos, Dictionary<Vector3Int, Node> nodes)
     {
-        current = GetNode(startPos);
-
-        openList = new HashSet<Node>();
-
-        closedList = new HashSet<Node>();
-
-        //Adding starting node to the open list
-        openList.Add(current);
-
-        //SD
-        NavigationMap = GameObject.FindWithTag("NavigationMap").GetComponent<Tilemap>();
-    }
-
-    public void Algorithm()
-    {
-        if (current == null)
-            Initialize();
-
-        while(openList.Count > 0 && path == null)
+        //generates a new node if node at pos doesn't exist
+        if (nodes.TryGetValue(pos, out Node result))
         {
-            List<Node> neighbours = FindNeighbours(current.Position);
-
-            ExamineNeighbours(neighbours, current);
-
-            UpdateCurrentTile(ref current);
-
-            path = GeneratePath(current);
+            return result;
         }
-
-        AstarDebugger.MyInstance.CreateTiles(openList, closedList, startPos, goalPos, path);
-    }
-
-    public void Algorithm(Node current, Node target)
-    {
-        if (current == null)
-            Initialize();
-
-        while (openList.Count > 0 && path == null)
+        else
         {
-            List<Node> neighbours = FindNeighbours(current.Position);
-
-            ExamineNeighbours(neighbours, current);
-
-            UpdateCurrentTile(ref current);
-
-            path = GeneratePath(current, target);
+            result = new Node(pos);
+            nodes.Add(pos, result);
+            return result;
         }
     }
 
-    private List<Node> FindNeighbours(Vector3Int parentPos)
+    private List<Node> FindNeighbours(Vector3Int parentPos, Dictionary<Vector3Int, Node> nodes) //this dictionary should only exist while the algorithm is running, it's one time use only (because we want the parent and weights to be reset when we generate a new path to a new location)
     {
         List<Node> neighbours = new List<Node>();
         Vector3Int neighborPos;
-
-
-
-        //for (int x = -1; x <= 1; x++)
-        //{
-        //    for (int y = -1; y <= 1; y++)
-        //    {
-        //        neighborPos = new Vector3Int(parentPos.x - x, parentPos.y - y, parentPos.z);
-
-        //        if (y != 0 || x != 0)
-        //        {
-        //            TODO figure out a way to make sure tiles are actually existing so we can see debug visuals
-        //            if (neighborPos != startPos && tilemap.GetTile(neighborPos)) //&& !waterTiles.Contains(neighborPos))
-        //            {
-        //                Node neighbor = GetNode(neighborPos);
-        //                neighbours.Add(neighbor);
-        //            }
-
-        //        }
-        //    }
-        //}
-
-
+        
 
         /***************************************
             checking for adjacent free tiles
         ***************************************/
 
         neighborPos = parentPos + Vector3Int.right;
-        if (!NavigationMap.GetTile(neighborPos))
+        if (!navigationMap.GetTile(neighborPos))
         {
-            if (neighborPos != startPos && tilemap.GetTile(neighborPos))
+            if (tilemap.GetTile(neighborPos))
             {
-                Node neighbor = GetNode(neighborPos);
+                Node neighbor = GetNode(neighborPos, nodes);
                 neighbours.Add(neighbor);
             }
         }
 
         neighborPos = parentPos + Vector3Int.left;
-        if (!NavigationMap.GetTile(neighborPos))
+        if (!navigationMap.GetTile(neighborPos))
         {
-            if (neighborPos != startPos && tilemap.GetTile(neighborPos))
+            if (tilemap.GetTile(neighborPos))
             {
-                Node neighbor = GetNode(neighborPos);
+                Node neighbor = GetNode(neighborPos, nodes);
                 neighbours.Add(neighbor);
             }
         }
 
         neighborPos = parentPos + Vector3Int.up;
-        if (!NavigationMap.GetTile(neighborPos))
+        if (!navigationMap.GetTile(neighborPos))
         {
-            if (neighborPos != startPos && tilemap.GetTile(neighborPos))
+            if (tilemap.GetTile(neighborPos))
             {
-                Node neighbor = GetNode(neighborPos);
+                Node neighbor = GetNode(neighborPos, nodes);
                 neighbours.Add(neighbor);
             }
         }
 
         neighborPos = parentPos + Vector3Int.down;
-        if (!NavigationMap.GetTile(neighborPos))
+        if (!navigationMap.GetTile(neighborPos))
         {
-            if (neighborPos != startPos && tilemap.GetTile(neighborPos))
+            if (tilemap.GetTile(neighborPos))
             {
-                Node neighbor = GetNode(neighborPos);
+                Node neighbor = GetNode(neighborPos, nodes);
                 neighbours.Add(neighbor);
             }
         }
@@ -201,174 +211,90 @@ public class Astar : MonoBehaviour
 
         //bottom left
         neighborPos = parentPos + Vector3Int.down + Vector3Int.left;
-        if (!NavigationMap.GetTile(parentPos + Vector3Int.left) &&
-            !NavigationMap.GetTile(parentPos + Vector3Int.down) &&
-            !NavigationMap.GetTile(neighborPos))
+        if (!navigationMap.GetTile(parentPos + Vector3Int.left) &&
+            !navigationMap.GetTile(parentPos + Vector3Int.down) &&
+            !navigationMap.GetTile(neighborPos))
         {
-            Node neighbor = GetNode(neighborPos);
-            neighbours.Add(neighbor);
+            if (tilemap.GetTile(neighborPos))
+            {
+                Node neighbor = GetNode(neighborPos, nodes);
+                neighbours.Add(neighbor);
+            }                
         }
 
         //bottom right
         neighborPos = parentPos + Vector3Int.down + Vector3Int.right;
-        if (!NavigationMap.GetTile(parentPos + Vector3Int.right) &&
-            !NavigationMap.GetTile(parentPos + Vector3Int.down) &&
-            !NavigationMap.GetTile(neighborPos))
+        if (!navigationMap.GetTile(parentPos + Vector3Int.right) &&
+            !navigationMap.GetTile(parentPos + Vector3Int.down) &&
+            !navigationMap.GetTile(neighborPos))
         {
-            Node neighbor = GetNode(neighborPos);
-            neighbours.Add(neighbor);
+            if (tilemap.GetTile(neighborPos))
+            {
+                Node neighbor = GetNode(neighborPos, nodes);
+                neighbours.Add(neighbor);
+            }
         }
 
         //top left
         neighborPos = parentPos + Vector3Int.up + Vector3Int.left;
-        if (!NavigationMap.GetTile(parentPos + Vector3Int.left) &&
-            !NavigationMap.GetTile(parentPos + Vector3Int.up) &&
-            !NavigationMap.GetTile(neighborPos))
+        if (!navigationMap.GetTile(parentPos + Vector3Int.left) &&
+            !navigationMap.GetTile(parentPos + Vector3Int.up) &&
+            !navigationMap.GetTile(neighborPos))
         {
-            Node neighbor = GetNode(neighborPos);
-            neighbours.Add(neighbor);
+            if (tilemap.GetTile(neighborPos))
+            {
+                Node neighbor = GetNode(neighborPos, nodes);
+                neighbours.Add(neighbor);
+            }
         }
 
         //top right
         neighborPos = parentPos + Vector3Int.up + Vector3Int.right;
-        if (!NavigationMap.GetTile(parentPos + Vector3Int.right) &&
-            !NavigationMap.GetTile(parentPos + Vector3Int.up) &&
-            !NavigationMap.GetTile(neighborPos))
+        if (!navigationMap.GetTile(parentPos + Vector3Int.right) &&
+            !navigationMap.GetTile(parentPos + Vector3Int.up) &&
+            !navigationMap.GetTile(neighborPos))
         {
-            Node neighbor = GetNode(neighborPos);
-            neighbours.Add(neighbor);
+            if (tilemap.GetTile(neighborPos))
+            {
+                Node neighbor = GetNode(neighborPos, nodes);
+                neighbours.Add(neighbor);
+            }
         }
 
         return neighbours;
     }
 
-    //TODO avoid already added Nodes
-    private void ExamineNeighbours(List<Node> neighbours, Node current)
-    {
-        for (int i = 0; i < neighbours.Count; i++)
-        {
-            Node neighbour = neighbours[i];
-            int gScore = DetermineGScore(neighbours[i].Position, current.Position);
 
-            if (openList.Contains(neighbour)) 
+    private static int FindEuclideanDistance(Vector3Int posA, Vector3Int posB)
+    {
+        //everything is squared because exact values don't matter, we're just comparing whether one distance is greater than another, doing it this way means we don't need to find the square root of anything, it is faster
+                
+        return (posA - posB).sqrMagnitude;
+    }
+
+    public Vector3Int getStartPos()
+    {
+        return new Vector3Int(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.y), 0);
+    }
+
+    public Vector3Int getGoalPos()
+    {
+        return goalPos;
+    }
+
+    private void moveActor()
+    {
+        if(path.Count > 1)
+        {
+            //if at pos, remove it from path
+            if (Vector3.Distance(transform.position, path.Peek() + new Vector3(0.5f, 0.5f, 0)) < 0.5f) //checks if it's close enough
             {
-                if(current.G + gScore < neighbour.G)
-                {
-                    CalcValues(current, neighbour, gScore);
-                }
+                path.Pop();
             }
-            else if(!closedList.Contains(neighbour))
-            {
-                CalcValues(current, neighbour, gScore);
 
-                openList.Add(neighbour);
-            }
+            //seek to next pos in path
+            seekAI.setTarget(path.Peek() + new Vector3(0.5f, 0.5f, 0));
+            //arriveAI.setTarget(goalPos + new Vector3(0.5f, 0.5f, 0));
         }
     }
-
-    private void CalcValues(Node parent, Node neighbor, int cost)
-    {
-        neighbor.Parent = parent;
-
-        neighbor.G = parent.G + cost;
-
-        neighbor.H = (Mathf.Abs(neighbor.Position.x - goalPos.x) + Mathf.Abs(neighbor.Position.y - goalPos.y) * 10);
-        
-        neighbor.F = neighbor.G + neighbor.H;
-    }
-
-    private int DetermineGScore(Vector3Int neighbour, Vector3Int current)
-    {
-        int gScore = 0;
-
-        int x = current.x -neighbour.x;
-        int y = current.y -neighbour.y;
-
-        if (Mathf.Abs(x-y) % 2 == 1)
-        {
-            gScore = 10;
-        }
-        else
-        {
-            gScore = 14;
-        }
-
-        return gScore;
-    }
-
-    private void UpdateCurrentTile(ref Node current)
-    {
-        openList.Remove(current);
-
-        closedList.Add(current);
-
-        if (openList.Count > 0)
-        {
-            current = openList.OrderBy(x => x.F).First();
-        }
-    }
-
-    //creating Nodes if not in the list
-    private Node GetNode(Vector3Int pos)
-    {
-        if (allNodes.ContainsKey(pos))
-        {
-            return allNodes[pos];
-        }
-        else
-        {
-            Node node = new Node(pos);
-            allNodes.Add(pos, node);
-            return node;
-        }
-    }
-
-    //function to set start and goal positions
-    private void ChangeTile(Vector3Int clickPos)
-    {
-       if (clickTimes == 0)
-        {
-            startPos = clickPos;
-            clickTimes = 1;
-        }
-       if (clickTimes == 1)
-        { 
-            goalPos = clickPos;
-        }
-    }
-
-    private Stack<Vector3Int> GeneratePath(Node current)
-    {
-        if(current.Position == goalPos)
-        {
-            Stack<Vector3Int> finalPath = new Stack<Vector3Int>();
-
-            while(current.Position != startPos)
-            {
-                finalPath.Push(current.Position);
-
-                current = current.Parent;
-            }
-            return finalPath;
-        }
-        return null;
-    }
-
-    private Stack<Vector3Int> GeneratePath(Node current, Node target)
-    {
-        if (current.Position == target.Position)
-        {
-            Stack<Vector3Int> finalPath = new Stack<Vector3Int>();
-
-            while (current.Position != startPos)
-            {
-                finalPath.Push(current.Position);
-
-                current = current.Parent;
-            }
-            return finalPath;
-        }
-        return null;
-    }
-
 }
