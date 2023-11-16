@@ -3340,10 +3340,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: PathfindingGoblin
       objectReference: {fileID: 0}
+    - target: {fileID: 617188564649905836, guid: 56419d199dc2c1246b93938fc53f9b47,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1932449462504837019, guid: 56419d199dc2c1246b93938fc53f9b47,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1932449462504837019, guid: 56419d199dc2c1246b93938fc53f9b47,
         type: 3}
@@ -3389,6 +3394,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4653899794074369867, guid: 56419d199dc2c1246b93938fc53f9b47,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9204415340304947045, guid: 56419d199dc2c1246b93938fc53f9b47,
         type: 3}
