@@ -460,8 +460,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1642115839
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -3340,11 +3340,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PathfindingGoblin
       objectReference: {fileID: 0}
-    - target: {fileID: 617188564649905836, guid: 56419d199dc2c1246b93938fc53f9b47,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1932449462504837019, guid: 56419d199dc2c1246b93938fc53f9b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3395,10 +3390,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4653899794074369867, guid: 56419d199dc2c1246b93938fc53f9b47,
+    - target: {fileID: 3915640015100737465, guid: 56419d199dc2c1246b93938fc53f9b47,
         type: 3}
-      propertyPath: m_Enabled
-      value: 1
+      propertyPath: m_SortingLayer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9204415340304947045, guid: 56419d199dc2c1246b93938fc53f9b47,
         type: 3}
@@ -3822,6 +3817,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4775785518680806654, guid: 2d55b07beb1b94047ad4d39d2d99af05,
         type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4775785518680806654, guid: 2d55b07beb1b94047ad4d39d2d99af05,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 8
       objectReference: {fileID: 0}
@@ -3869,6 +3869,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4837890386440442706, guid: 2d55b07beb1b94047ad4d39d2d99af05,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4837890386440442706, guid: 2d55b07beb1b94047ad4d39d2d99af05,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1642115839
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

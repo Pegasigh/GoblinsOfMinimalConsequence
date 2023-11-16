@@ -83,58 +83,61 @@ public class Astar : MonoBehaviour
         openSet = new HashSet<Node>();
         openSet.Add(GetNode(startPos, nodes));
 
-        int iterations = 0;
 
-        //explores nodes until there are no more nodes left or end has been found
-        while (openSet.Count != 0)
+        //only runs the algorithm if goalPos is an unoccupied tile
+        if (!navigationMap.GetTile(goalPos))
         {
-            //find node with lowest F score
-            Node current = openSet.First();
-            foreach (Node node in openSet)
+            //explores nodes until there are no more nodes left or end has been found
+            while (openSet.Count != 0)
             {
-                if (current.F > node.F)
+                //find node with lowest F score
+                Node current = openSet.First();
+                foreach (Node node in openSet)
                 {
-                    current = node;
-                }
-            }
-
-            //at end node, creates a path from start to end
-            if (current.Position == goalPos)
-            {
-                //construct a path
-                while (current.Position != startPos)
-                {
-                    result.Push(current.Position);
-                    current = current.Parent;
-
-                    //iterations++;
-                    //if (iterations > 1000)
-                    //{ break; }
+                    if (current.F > node.F)
+                    {
+                        current = node;
+                    }
                 }
 
-                return result;
-            }
-
-
-            //ensuring dictionary stores the shortest route between nodes and adds edges to openSet
-            foreach (Node neighbor in FindNeighbours(current.Position, nodes))
-            {
-                //tentative g score will replace g score if better
-                int tentativeG = current.G + FindEuclideanDistance(current.Position, neighbor.Position);
-                if (tentativeG < neighbor.G)
+                //at end node, creates a path from start to end
+                if (current.Position == goalPos)
                 {
-                    neighbor.G = tentativeG;
-                    neighbor.F = tentativeG + FindEuclideanDistance(goalPos, neighbor.Position);
-                    neighbor.Parent = current;
-                    openSet.Add(neighbor); //only adds if not already in set
-                }
-            }
+                    //construct a path
+                    while (current.Position != startPos)
+                    {
+                        result.Push(current.Position);
+                        current = current.Parent;
 
-            //already explored this node, now adding it to closedSet and removing it from openSet
-            closedSet.Add(current);
-            openSet.Remove(current);
+                        //iterations++;
+                        //if (iterations > 1000)
+                        //{ break; }
+                    }
+
+                    return result;
+                }
+
+
+                //ensuring dictionary stores the shortest route between nodes and adds edges to openSet
+                foreach (Node neighbor in FindNeighbours(current.Position, nodes))
+                {
+                    //tentative g score will replace g score if better
+                    int tentativeG = current.G + FindEuclideanDistance(current.Position, neighbor.Position);
+                    if (tentativeG < neighbor.G)
+                    {
+                        neighbor.G = tentativeG;
+                        neighbor.F = tentativeG + FindEuclideanDistance(goalPos, neighbor.Position);
+                        neighbor.Parent = current;
+                        openSet.Add(neighbor); //only adds if not already in set
+                    }
+                }
+
+                //already explored this node, now adding it to closedSet and removing it from openSet
+                closedSet.Add(current);
+                openSet.Remove(current);
+            }
         }
-
+            
         //no path found, basically just have goblin stay where he is
         result.Push(startPos);
         return result;
