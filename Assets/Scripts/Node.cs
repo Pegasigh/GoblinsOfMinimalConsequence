@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Node
 {
-    public int G { get; set; } = int.MaxValue;
+    public float G { get; set; } = float.PositiveInfinity;
     //public int H { get; set; }
-    public int F { get; set; } = int.MaxValue;
+    public float F { get; set; } = float.PositiveInfinity;
     public Node Parent { get; set; }
     public Vector3Int Position { get; set; }
 

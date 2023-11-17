@@ -81,7 +81,10 @@ public class Astar : MonoBehaviour
 
         //adding first node to openset and dictionary
         openSet = new HashSet<Node>();
-        openSet.Add(GetNode(startPos, nodes));
+        Node startNode = GetNode(startPos, nodes);
+        startNode.G = 0;
+        openSet.Add(startNode);
+
 
 
         //only runs the algorithm if goalPos is an unoccupied tile
@@ -122,7 +125,8 @@ public class Astar : MonoBehaviour
                 foreach (Node neighbor in FindNeighbours(current.Position, nodes))
                 {
                     //tentative g score will replace g score if better
-                    int tentativeG = current.G + FindEuclideanDistance(current.Position, neighbor.Position);
+                    float tentativeG = current.G + FindEuclideanDistance(current.Position, neighbor.Position);
+
                     if (tentativeG < neighbor.G)
                     {
                         neighbor.G = tentativeG;
@@ -268,11 +272,16 @@ public class Astar : MonoBehaviour
     }
 
 
-    private static int FindEuclideanDistance(Vector3Int posA, Vector3Int posB)
+    private static float FindEuclideanDistance(Vector3Int posA, Vector3Int posB)
     {
-        //everything is squared because exact values don't matter, we're just comparing whether one distance is greater than another, doing it this way means we don't need to find the square root of anything, it is faster
-                
-        return (posA - posB).sqrMagnitude;
+        //converting to float vectors
+        Vector3 posA_ = (Vector3)posA;
+        Vector3 posB_ = (Vector3)posB;
+
+        //pythagorium to find distance between the positions
+        float result = Mathf.Sqrt(((posA_.x - posB_.x) * (posA_.x - posB_.x)) + ((posA_.y - posB_.y) * (posA_.y - posB_.y)));
+
+        return result;
     }
 
     public Vector3Int getStartPos()
