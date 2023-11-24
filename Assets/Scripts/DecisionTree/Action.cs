@@ -1,57 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class Action : MonoBehaviour
+
+using UnityEngine.Analytics;
+
+public abstract class Action : DecisionTreeNode
 {
-    // Start is called before the first frame update
-    void Start()
+    public override DecisionTreeNode MakeDecision()
     {
-        
+        return this;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public abstract void PerformAction();
 
-
-    // Action methods
-    public void Eat()
-    {
-        Debug.Log("Eating...");
-        // Add logic for eating here
-    }
-
-    public void Sleep()
-    {
-        Debug.Log("Sleeping...");
-        // Add logic for sleeping here
-    }
-
-    public void GatherFood()
-    {
-        Debug.Log("Gathering food...");
-        // Add logic for gathering food here
-    }
-
-    public void GatherWood()
-    {
-        Debug.Log("Gathering wood...");
-        // Add logic for gathering wood here
-    }
-
-    public void PlayGames()
-    {
-        Debug.Log("Playing games...");
-        // Add logic for playing games here
-    }
-
-    public void DanceAtFire()
-    {
-        Debug.Log("Dancing at fire...");
-        // Add logic for dancing at fire here
-    }
+    // Eat, Sleep, Socialize, Dance, Play Game, Fish, Kill
 
 }
