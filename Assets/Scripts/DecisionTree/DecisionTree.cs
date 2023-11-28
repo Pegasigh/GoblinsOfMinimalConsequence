@@ -29,6 +29,14 @@ public class DecisionTree : MonoBehaviour
     void Update()
     {
         //TODO: look through decision tree, perform action
+
+        //if firstNode is of type Decision, call its function "GetBranch"
+        //"GetBranch" returns either another decision or an action
+        //if it returns a decision, call its function "GetBranch"
+        //keep going until GetBranch returns an action
+        //call "PerformAction"
+
+        //in other words: for as long as "GetBranch" returns a decision, keep calling "GetBranch"
     }
 
     DecisionTreeNode ProcessDecision(XmlNode node)
