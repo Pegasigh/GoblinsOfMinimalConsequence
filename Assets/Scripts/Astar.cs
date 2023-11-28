@@ -47,20 +47,22 @@ public class Astar : MonoBehaviour
 
     void Update()
     {
-        //checking mouse click to set start and goal Pos
-        if (Input.GetMouseButtonDown(0))
-        {
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, layerMask);
+        ////checking mouse click to set start and goal Pos
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, Mathf.Infinity, layerMask);
 
-            if (hit.collider != null)
-            {
-                Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                Vector3Int clickPos = tilemap.WorldToCell(mouseWorldPos);
+        //    if (hit.collider != null)
+        //    {
+        //        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //        Vector3Int clickPos = tilemap.WorldToCell(mouseWorldPos);
 
-                goalPos = clickPos;
-                path = AStarAlgorithm(getStartPos(), goalPos);
-            }
-        }
+        //        goalPos = clickPos;
+        //        path = AStarAlgorithm(getStartPos(), goalPos);
+        //    }
+        //}
+
+
 
         //actually move the goblin
         moveActor();
@@ -309,4 +311,17 @@ public class Astar : MonoBehaviour
             //arriveAI.setTarget(goalPos + new Vector3(0.5f, 0.5f, 0));
         }
     }
+
+    public void PathfindTo(Vector3 goalPos)
+    {
+        goalPos = new Vector3Int((int)goalPos.x, (int)goalPos.y, (int)goalPos.z);
+        path = AStarAlgorithm(getStartPos(), goalPos);
+
+ 
+    }
+
+
+
 }
+
+

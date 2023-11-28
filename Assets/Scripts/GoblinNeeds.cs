@@ -15,12 +15,14 @@ public enum personalities
 
 public class GoblinNeeds : MonoBehaviour
 {
-    public double hunger;
-    public double fun;
-    public double energy;
-    public double social;
+    private double hunger;
+    private double fun;
+    private double energy;
+    private double social;
+
     public float needDecay = 1;
-    public personalities personality;
+
+    private personalities personality;
     
     // Start is called before the first frame update
     void Start()

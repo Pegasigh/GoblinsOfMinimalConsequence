@@ -4,6 +4,16 @@ using UnityEngine;
 public class Action_Fun : Action
 {
 
+
+    GoblinNeeds goblinNeed;
+    GameObject goblino;
+
+    public Action_Fun(GameObject goblino)
+    {
+        this.goblino = goblino;
+        goblinNeed = this.goblino.GetComponent<GoblinNeeds>();
+    }
+
     //Can add more functions into these, one for kill one for dance one ofr game and the perform action just randomly selects one. 
     public override void PerformAction()
     {
@@ -22,15 +32,20 @@ public class Action_Fun : Action
 
 
     }
-
     public void ActionGame()
     {
-        //target closest idle goblin. 
+        //target closest idle goblin.
+        
+
+        goblinNeed.Play(10);
+
     }
 
     public void ActionDance()
     {
         //target campfire
+
+        goblinNeed.Play(15);
     }
 
 
