@@ -2,22 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum personalities
+{
+    DEFAULT,
+    LAZY,
+    PLAYFUL,
+    GLUTTON,
+    EVIL,
+    ENERGETIC,
+    COUNT
+}
+
 public class GoblinNeeds : MonoBehaviour
 {
     public double hunger;
     public double fun;
     public double energy;
-    public double personality = 0;
-
+    public double social;
+    public float needDecay = 1;
+    public personalities personality;
+    
     // Start is called before the first frame update
     void Start()
     {
+        //Set all Needs to 100% on creation
         hunger = 100;
         fun = 100;
         energy = 100;
+        social = 100;
 
-        personality = Random.RandomRange(1, 6);
-
+        //Give goblin a random personality
+        personality = (personalities)Random.Range(0, (int)personalities.COUNT);
 
     }
 
@@ -26,66 +41,80 @@ public class GoblinNeeds : MonoBehaviour
     {
         switch (personality) 
         {
-            case 1:
+            case personalities.DEFAULT:
                 //Default Personality
 
-                hunger -= 1.0;
-                fun -= 1.0;
-                energy -= 1.0;
+                hunger -= 1.0 * needDecay;
+                fun -= 1.0 * needDecay;
+                energy -= 1.0 * needDecay;
+                social -= 1.0 * needDecay;
 
                 break;
-            case 2:
+            case personalities.LAZY:
                 //Lazy Personality
 
-                hunger -= 1.5;
-                fun -= 0.5;
-                energy -= 2.5;
+                hunger -= 1.5 * needDecay;
+                fun -= 0.5 * needDecay;
+                energy -= 2.5 * needDecay;
+                social -= 1.0 * needDecay;
 
                 break;
-            case 3:
+            case personalities.PLAYFUL:
                 //Playful Personality
 
-                hunger -= 1.0;
-                fun -= 2.5;
-                energy -= 1.5;
+                hunger -= 1.0 * needDecay;
+                fun -= 2.5 * needDecay;
+                energy -= 1.5 * needDecay;
+                social -= 1.5 * needDecay;
 
                 break;
-            case 4:
+            case personalities.GLUTTON:
                 //Glutton Personality
 
-                hunger -= 2.5;
-                fun -= 1.0;
-                energy -= 1.0;
+                hunger -= 2.5 * needDecay;
+                fun -= 1.0 * needDecay;
+                energy -= 1.0 * needDecay;
+                social -= 0.5 * needDecay;
 
                 break;
-            case 5:
+            case personalities.EVIL:
                 //Evil Personality
 
-                hunger -= 1.5;
-                fun -= 3.5;
-                energy -= 0.1;
+                hunger -= 1.5 * needDecay;
+                fun -= 3.5 * needDecay;
+                energy -= 0.1 * needDecay;
+                social -= 1.0 * needDecay;
 
                 break;
-            case 6:
+            case personalities.ENERGETIC:
                 //Energenic Personality
 
-                hunger -= 1.5;
-                fun -= 1.0;
-                energy -= 0.1;
+                hunger -= 1.5 * needDecay;
+                fun -= 1.0 * needDecay;
+                energy -= 0.1 * needDecay;
+                social -= 1.0 * needDecay;
 
                 break;
         }
         
     }
 
-    public void Feed()
+    //These are used to fulfill the needs of each goblin
+    public void Feed(int value)
     {
-        hunger += 50.0;
+        hunger += value;
     }
-    public void Play()
+
+    public void Play(int value)
     {
-        fun += 50.0;
+        fun += value;
     }
+    
+    public void Talk(int value)
+    {
+        social += value;
+    }
+    
     public void Rest()
     {
         energy += 50.0;
