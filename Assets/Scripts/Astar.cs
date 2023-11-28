@@ -312,9 +312,9 @@ public class Astar : MonoBehaviour
         }
     }
 
-    public void PathfindTo(Vector3 goalPos)
+    public void PathfindTo(Vector3 goalPos_)
     {
-        goalPos = new Vector3Int((int)goalPos.x, (int)goalPos.y, (int)goalPos.z);
+        goalPos = new Vector3Int((int)goalPos_.x, (int)goalPos_.y, (int)goalPos_.z);
         path = AStarAlgorithm(getStartPos(), goalPos);
 
  

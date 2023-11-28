@@ -90,12 +90,14 @@ public class DecisionTree : MonoBehaviour
 
     Action CreateActionInstance(string type)
     {
-        if (type == "Eat") return new Action_Eat();
-        if (type == "Sleep") return new Action_Sleep();
-        if (type == "Socialize") return new Action_Socialize();
-        if (type == "FunEvil") return new Action_FunEvil();
-        if (type == "Fun") return new Action_Fun();
-        if (type == "Fish") return new Action_Fish();
+        //TODO: pass in the proper variables so these compile
+
+        //if (type == "Eat") return new Action_Eat();
+        //if (type == "Sleep") return new Action_Sleep();
+        //if (type == "Socialize") return new Action_Socialize();
+        //if (type == "FunEvil") return new Action_FunEvil();
+        //if (type == "Fun") return new Action_Fun();
+        //if (type == "Fish") return new Action_Fish();
 
         return null;
     }
