@@ -1,15 +1,21 @@
 
 public class Decision_IsHungry : Decision
 {
-    //needs reference to goblin's needs script
+    private GoblinNeeds goblinInfo;
+    private float hungerThreshold;
+
+    public Decision_IsHungry(GoblinNeeds goblinInfo_, float hungerThreshold_)
+    {
+        goblinInfo = goblinInfo_;
+        hungerThreshold = hungerThreshold_;
+    }
 
     public override bool TestValue()
     {
-        //testing if goblin's hunger value is below a certain value
-        //if goblin is hungry, return true, else return false
-
-
-
+        if (goblinInfo.hunger < hungerThreshold) //goblin is hungry
+        {
+            return true;
+        }        
         return false;
     }
 

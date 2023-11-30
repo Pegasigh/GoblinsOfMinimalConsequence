@@ -6,23 +6,24 @@ using UnityEngine;
 public class FoodLevels : MonoBehaviour
 {
     [SerializeField]
-    private int foodLevel;
+    private float foodLevel;
 
-    void AddFood(int foodvalue)
+    void AddFood(float foodvalue)
     {
         
         foodLevel += foodvalue;
     }
 
-    void SubtractFood(int foodvalue)
+    void SubtractFood(float foodvalue)
     {
         
         foodLevel -= foodvalue;
-        if (foodLevel < 0) { foodLevel = 0; }
+        if (foodLevel < 0.0f) { foodLevel = 0.0f; }
         
     }
 
-    
-
-
+    public float GetFoodLevels()
+    {
+        return foodLevel;
+    }
 }

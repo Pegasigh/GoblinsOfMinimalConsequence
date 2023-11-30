@@ -1,15 +1,36 @@
 
 public class Decision_HasEnoughFood : Decision
 {
-    //needs reference to script with village's food levels
+    private FoodLevels villageInfo;
+    private GoblinNeeds goblinInfo;
+    private float hasFoodThreshold;
+    private float hasFoodThreshold_productive;
+
+    public Decision_HasEnoughFood(FoodLevels villageInfo_, GoblinNeeds goblinInfo_, float hasFoodThreshold_, float hasFoodThreshold_productive_)
+    {
+        villageInfo = villageInfo_;
+        goblinInfo = goblinInfo_;
+        hasFoodThreshold = hasFoodThreshold_;
+        hasFoodThreshold_productive = hasFoodThreshold_productive_;
+    }
 
     public override bool TestValue()
     {
-        //testing if village's food value is above a certain value
-        //if village has enough food, return true, else return false
+        //goblin is productive
+        if (goblinInfo.personality == personalities.PRODUCTIVE) 
+        {
+            if(villageInfo.GetFoodLevels() > hasFoodThreshold_productive) //has enough food
+            {
+                return true;
+            }
+            return false;
+        }
 
-
-
+        //goblin is not productive
+        else if(villageInfo.GetFoodLevels() > hasFoodThreshold) //has enough food
+        {
+            return true;
+        }
         return false;
     }
 

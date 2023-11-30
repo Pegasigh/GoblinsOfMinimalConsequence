@@ -4,25 +4,25 @@ using UnityEngine;
 
 public enum personalities
 {
-    DEFAULT,
-    LAZY,
-    PLAYFUL,
-    GLUTTON,
     EVIL,
-    ENERGETIC,
+    FRIENDLY,
+    LAZY,
+    SLOB,
+    PRODUCTIVE,
+    PLAYFUL,
     COUNT
 }
 
 public class GoblinNeeds : MonoBehaviour
 {
-    private double hunger;
-    private double fun;
-    private double energy;
-    private double social;
+    public float hunger;
+    public float fun;
+    public float energy;
+    public float social;
 
     public float needDecay = 1;
 
-    private personalities personality;
+    public personalities personality;
     
     // Start is called before the first frame update
     void Start()
@@ -43,62 +43,48 @@ public class GoblinNeeds : MonoBehaviour
     {
         switch (personality) 
         {
-            case personalities.DEFAULT:
-                //Default Personality
-
-                hunger -= 1.0 * needDecay;
-                fun -= 1.0 * needDecay;
-                energy -= 1.0 * needDecay;
-                social -= 1.0 * needDecay;
-
-                break;
-            case personalities.LAZY:
-                //Lazy Personality
-
-                hunger -= 1.5 * needDecay;
-                fun -= 0.5 * needDecay;
-                energy -= 2.5 * needDecay;
-                social -= 1.0 * needDecay;
-
-                break;
-            case personalities.PLAYFUL:
-                //Playful Personality
-
-                hunger -= 1.0 * needDecay;
-                fun -= 2.5 * needDecay;
-                energy -= 1.5 * needDecay;
-                social -= 1.5 * needDecay;
-
-                break;
-            case personalities.GLUTTON:
-                //Glutton Personality
-
-                hunger -= 2.5 * needDecay;
-                fun -= 1.0 * needDecay;
-                energy -= 1.0 * needDecay;
-                social -= 0.5 * needDecay;
-
-                break;
             case personalities.EVIL:
-                //Evil Personality
-
-                hunger -= 1.5 * needDecay;
-                fun -= 3.5 * needDecay;
-                energy -= 0.1 * needDecay;
-                social -= 1.0 * needDecay;
-
+                hunger -= 1.0f * needDecay;
+                fun -= 1.0f * needDecay;
+                energy -= 1.0f * needDecay;
+                social -= 1.0f * needDecay;
                 break;
-            case personalities.ENERGETIC:
-                //Energenic Personality
 
-                hunger -= 1.5 * needDecay;
-                fun -= 1.0 * needDecay;
-                energy -= 0.1 * needDecay;
-                social -= 1.0 * needDecay;
-
+            case personalities.FRIENDLY:
+                hunger -= 1.0f * needDecay;
+                fun -= 1.0f * needDecay;
+                energy -= 1.0f * needDecay;
+                social -= 1.5f * needDecay;
                 break;
-        }
-        
+
+            case personalities.LAZY:
+                hunger -= 1.0f * needDecay;
+                fun -= 1.0f * needDecay;
+                energy -= 1.5f * needDecay;
+                social -= 1.0f * needDecay;
+                break;
+
+            case personalities.SLOB:
+                hunger -= 1.5f * needDecay;
+                fun -= 1.0f * needDecay;
+                energy -= 1.0f * needDecay;
+                social -= 1.0f * needDecay;
+                break;
+
+            case personalities.PRODUCTIVE:
+                hunger -= 1.0f * needDecay;
+                fun -= 1.0f * needDecay;
+                energy -= 1.0f * needDecay;
+                social -= 1.0f * needDecay;
+                break;
+
+            case personalities.PLAYFUL:
+                hunger -= 1.0f * needDecay;
+                fun -= 1.0f * needDecay;
+                energy -= 1.0f * needDecay;
+                social -= 1.0f * needDecay;
+                break;
+        }        
     }
 
     //These are used to fulfill the needs of each goblin
@@ -119,6 +105,6 @@ public class GoblinNeeds : MonoBehaviour
     
     public void Rest()
     {
-        energy += 50.0;
+        energy += 50.0f;
     }
 }

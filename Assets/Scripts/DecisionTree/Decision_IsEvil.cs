@@ -1,15 +1,19 @@
 
 public class Decision_IsEvil : Decision
 {
-    //needs reference to goblin's personalities script
+    private GoblinNeeds goblinInfo;
+
+    public Decision_IsEvil(GoblinNeeds goblinInfo_)
+    {
+        goblinInfo = goblinInfo_;
+    }
 
     public override bool TestValue()
     {
-        //testing if goblin is evil
-        //if goblin is evil, return true, else return false
-
-
-
+        if(goblinInfo.personality == personalities.EVIL) //goblin is evil
+        {
+            return true;
+        }
         return false;
     }
 

@@ -1,15 +1,21 @@
 
 public class Decision_NeedsSocial : Decision
 {
-    //needs reference to goblin's needs script
+    private GoblinNeeds goblinInfo;
+    private float socialThreshold;
+
+    public Decision_NeedsSocial(GoblinNeeds goblinInfo_, float socialThreshold_)
+    {
+        goblinInfo = goblinInfo_;
+        socialThreshold = socialThreshold_;
+    }
 
     public override bool TestValue()
     {
-        //testing if goblin's social value is below a certain value
-        //if goblin needs social, return true, else return false
-
-
-
+        if(goblinInfo.social < socialThreshold) //goblin needs social
+        {
+            return true;
+        }
         return false;
     }
 

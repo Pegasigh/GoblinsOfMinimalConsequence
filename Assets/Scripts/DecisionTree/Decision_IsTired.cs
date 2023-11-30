@@ -1,15 +1,21 @@
 
 public class Decision_IsTired : Decision
 {
-    //needs reference to goblin's needs script
+    private GoblinNeeds goblinInfo;
+    private float tiredThreshold;
+
+    public Decision_IsTired(GoblinNeeds goblinInfo_, float tiredThreshold_)
+    {
+        goblinInfo = goblinInfo_;
+        tiredThreshold = tiredThreshold_;
+    }
 
     public override bool TestValue()
     {
-        //testing if goblin's energy value is below a certain value
-        //if goblin is tired, return true, else return false
-
-
-
+        if(goblinInfo.energy < tiredThreshold) //goblin is tired
+        {
+            return true;
+        }
         return false;
     }
 

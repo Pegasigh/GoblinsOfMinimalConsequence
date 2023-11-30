@@ -1,15 +1,21 @@
 
 public class Decision_NeedsFun : Decision
 {
-    //needs reference to goblin's needs script
+    private GoblinNeeds goblinInfo;
+    private float funThreshold;
+
+    public Decision_NeedsFun(GoblinNeeds goblinInfo_, float funThreshold_)
+    {
+        goblinInfo = goblinInfo_;
+        funThreshold = funThreshold_;
+    }
 
     public override bool TestValue()
     {
-        //testing if goblin's fun value is below a certain value
-        //if goblin needs fun, return true, else return false
-
-
-
+        if(goblinInfo.fun < funThreshold) //goblin needs fun
+        {
+            return true;
+        }
         return false;
     }
 

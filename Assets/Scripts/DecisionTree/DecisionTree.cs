@@ -13,9 +13,27 @@ public class DecisionTree : MonoBehaviour
     private DecisionTreeNode firstNode = null;
     public TextAsset xmlFile;
 
+    //references needed for Decision and Actions
+    private GoblinNeeds goblinInfo;
+    private FoodLevels villageInfo;
+
+    //thresholds/modifiers to pass to decisions
+    public float hungerThreshold;
+    public float hasFoodThreshold;
+    public float hasFoodThreshold_productive;
+    public float tiredThreshold;
+    public float socialThreshold;
+    public float funThreshold;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        //set up references
+        goblinInfo = gameObject.GetComponent<GoblinNeeds>();
+        //TODO
+        //villageInfo = FindObjectOfType<>
+
         //load xml file
         XmlDocument xmlDoc = new XmlDocument();
         //xmlDoc.Load(xmlFile.text);
@@ -78,12 +96,12 @@ public class DecisionTree : MonoBehaviour
 
     Decision CreateDecisionInstance(string type)
     {
-        if (type == "IsHungry") return new Decision_IsHungry();
-        if (type == "HasEnoughFood") return new Decision_HasEnoughFood();
-        if (type == "IsTired") return new Decision_IsTired();
-        if (type == "NeedsSocial") return new Decision_NeedsSocial();
-        if (type == "NeedsFun") return new Decision_NeedsFun();
-        if (type == "IsEvil") return new Decision_IsEvil();
+        if (type == "IsHungry") return new Decision_IsHungry(goblinInfo, hungerThreshold);
+        if (type == "HasEnoughFood") return new Decision_HasEnoughFood(villageInfo, goblinInfo, hasFoodThreshold, hasFoodThreshold_productive);
+        if (type == "IsTired") return new Decision_IsTired(goblinInfo, tiredThreshold);
+        if (type == "NeedsSocial") return new Decision_NeedsSocial(goblinInfo, socialThreshold);
+        if (type == "NeedsFun") return new Decision_NeedsFun(goblinInfo, funThreshold);
+        if (type == "IsEvil") return new Decision_IsEvil(goblinInfo);
 
         return null;
     }
