@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - NavigationMap
+  - TentTag
+  - CampfireTag
+  - PondTag
+  - Cave
   layers:
   - Default
   - TransparentFX
