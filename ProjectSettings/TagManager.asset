@@ -9,6 +9,9 @@ TagManager:
   - CampfireTag
   - PondTag
   - Cave
+  - ThePit
+  - Dragging
+  - NOTDragging
   layers:
   - Default
   - TransparentFX
