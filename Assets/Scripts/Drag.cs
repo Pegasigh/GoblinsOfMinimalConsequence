@@ -6,9 +6,15 @@ using Input = UnityEngine.Input;
 public class Drag : MonoBehaviour
 {
 
-    public bool dragging = false;
-    private Vector3 offset;
+    public bool dragging;
     public Transform pos;
+
+    private Vector3 offset;
+
+    private void Start()
+    {
+        dragging = false;
+    }
 
     void Update()
     {
@@ -20,10 +26,12 @@ public class Drag : MonoBehaviour
     {
         offset = pos.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
         dragging = true;
+        gameObject.tag = "Dragging";
     }
 
     private void OnMouseUp()
     {
         dragging = false;
+        gameObject.tag = "NOTDragging";
     }
 }
