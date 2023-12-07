@@ -10,7 +10,7 @@ public class Action_Eat : Action
     FoodLevels foodlvl;
     GameObject goblino;
 
- public Action_Eat  (GameObject goblino, FoodLevels foodlvl)
+ public Action_Eat  (FoodLevels foodlvl)
     {   
         this.foodlvl = foodlvl;
         this.goblino = goblino;
@@ -21,7 +21,10 @@ public class Action_Eat : Action
 
         GameObject Campfire = GameObject.FindGameObjectWithTag("CampfireTag");
 
-        goblino.GetComponent<Astar>().PathfindTo(Campfire.transform.position);
+//        goblino.GetComponent<Astar>().PathfindTo(Campfire.transform.position);
+        goblino.GetComponent<DecisionTree>().targetPos.position = Campfire.transform.position;
+        goblino.GetComponent<Astar>().PathfindTo(goblino.GetComponent<DecisionTree>().targetPos.position);
+
 
         //target to the campfire
         goblinNeed.Feed(5);

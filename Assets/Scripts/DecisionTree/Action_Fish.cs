@@ -15,7 +15,7 @@ public class Action_Fish : Action
    
       
  
-    public Action_Fish(FoodLevels villagefoodLvl, GameObject goblino) 
+    public Action_Fish(FoodLevels villagefoodLvl) 
     { 
         this.goblino = goblino;
         goblinNeed = this.goblino.GetComponent<GoblinNeeds>();
@@ -28,7 +28,9 @@ public class Action_Fish : Action
 
         GameObject Pond = GameObject.FindGameObjectWithTag("PondTag");
 
-        goblino.GetComponent<Astar>().PathfindTo(Pond.transform.position);
+     //   goblino.GetComponent<Astar>().PathfindTo(Pond.transform.position);
+        goblino.GetComponent<DecisionTree>().targetPos.position = Pond.transform.position;
+        goblino.GetComponent<Astar>().PathfindTo(goblino.GetComponent<DecisionTree>().targetPos.position);
 
 
 

@@ -18,6 +18,8 @@ public class Action_Socialize : Action
     public override void PerformAction()
     {
         // Target another goblin, Initiate Interaction. 
+    //    goblino.GetComponent<DecisionTree>().targetPos.position = goblin.transform.position;
+    //    goblino.GetComponent<Astar>().PathfindTo(goblino.GetComponent<DecisionTree>().targetPos.position);
 
         goblinNeed.Talk(10);
 
