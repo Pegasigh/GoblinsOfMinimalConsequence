@@ -8,13 +8,13 @@ public class FoodLevels : MonoBehaviour
     [SerializeField]
     private float foodLevel;
 
-    void AddFood(float foodvalue)
+    public void AddFood(float foodvalue)
     {
         
         foodLevel += foodvalue;
     }
 
-    void SubtractFood(float foodvalue)
+  public void SubtractFood(float foodvalue)
     {
         
         foodLevel -= foodvalue;

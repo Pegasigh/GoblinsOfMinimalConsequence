@@ -21,9 +21,18 @@ public class Action_Eat : Action
 
         GameObject Campfire = GameObject.FindGameObjectWithTag("CampfireTag");
 
-//        goblino.GetComponent<Astar>().PathfindTo(Campfire.transform.position);
-        goblino.GetComponent<DecisionTree>().targetPos.position = Campfire.transform.position;
-        goblino.GetComponent<Astar>().PathfindTo(goblino.GetComponent<DecisionTree>().targetPos.position);
+        goblino.GetComponent<Astar>().PathfindTo(Campfire.transform.position);
+
+
+        Debug.Log("Start Wait Time");
+
+        new WaitForSeconds(3);
+
+        Debug.Log("End Wait Time");
+
+
+        //goblino.GetComponent<DecisionTree>().targetPos.position = Campfire.transform.position;
+        //goblino.GetComponent<Astar>().PathfindTo(goblino.GetComponent<DecisionTree>().targetPos.position);
 
 
         //target to the campfire
