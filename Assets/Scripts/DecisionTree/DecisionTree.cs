@@ -117,7 +117,7 @@ public class DecisionTree : MonoBehaviour
         //TODO: pass in the proper variables so these compile
 
         //if (type == "Eat") return new Action_Eat();
-        if (type == "Sleep") return new Action_Sleep();
+        //if (type == "Sleep") return new Action_Sleep();
         //if (type == "Socialize") return new Action_Socialize();
         //if (type == "FunEvil") return new Action_FunEvil();
         //if (type == "Fun") return new Action_Fun();
