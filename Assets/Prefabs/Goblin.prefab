@@ -281,6 +281,7 @@ MonoBehaviour:
   tiredThreshold: 0
   socialThreshold: 0
   funThreshold: 0
+  targetPos: {fileID: 6259117835931038228}
 --- !u!114 &2627221783854203752
 MonoBehaviour:
   m_ObjectHideFlags: 0

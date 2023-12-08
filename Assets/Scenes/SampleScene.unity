@@ -3321,12 +3321,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &342374735 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6259117835931038228, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1283574025}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -4294,11 +4288,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 709866029393078078, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
         type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 709866029393078078, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-        type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -4372,11 +4361,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5831117554549646427, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-        type: 3}
-      propertyPath: targetPos
-      value: 
-      objectReference: {fileID: 342374735}
     - target: {fileID: 9204415340304947045, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
         type: 3}
       propertyPath: tilemap

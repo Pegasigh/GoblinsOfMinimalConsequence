@@ -7,14 +7,12 @@ public class SeekAI : MonoBehaviour
 {
 
     Body bodyScript;
-    public GameObject seekTargetTransformObject;
     public Transform target;
 
     // Start is called before the first frame update
     void Start()
     {
         bodyScript = GetComponent<Body>();
-        target = seekTargetTransformObject.transform;
         target.parent = null;
     }
 
