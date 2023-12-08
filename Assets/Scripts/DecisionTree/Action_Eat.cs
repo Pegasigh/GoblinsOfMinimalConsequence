@@ -20,6 +20,8 @@ public class Action_Eat : Action
     public override void PerformAction()
     {
 
+        Debug.Log("Time for lunch, Crunch MUNCH! (Eat Action being Performed)");
+
         GameObject Campfire = GameObject.FindGameObjectWithTag("CampfireTag");
 
         goblino.GetComponent<Astar>().PathfindTo(Campfire.transform.position);

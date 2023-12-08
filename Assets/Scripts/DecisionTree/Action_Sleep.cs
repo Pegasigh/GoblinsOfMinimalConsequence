@@ -17,6 +17,9 @@ public class Action_Sleep : Action
     public override void PerformAction()
     {
 
+        Debug.Log("SCHLUMBER TIME :)  (Slumber Action Being Performed)");
+
+
         GameObject Tent = GameObject.FindGameObjectWithTag("TentTag");
 
         goblino.GetComponent<Astar>().PathfindTo(Tent.transform.position);

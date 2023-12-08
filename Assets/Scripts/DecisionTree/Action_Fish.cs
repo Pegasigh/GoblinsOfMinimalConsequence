@@ -25,7 +25,7 @@ public class Action_Fish : Action
     {
         //Set target to the Pond
         // if we need to edit goblin needs use goblinNeed
-
+        Debug.Log("Women want me, FISH FEAR ME! (Fishing Action being Performed)");
 
 
         GameObject Pond = GameObject.FindGameObjectWithTag("PondTag");
