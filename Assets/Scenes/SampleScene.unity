@@ -4381,6 +4381,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5831117554549646427, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
+        type: 3}
+      propertyPath: tiredThreshold
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 9204415340304947045, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
         type: 3}
       propertyPath: tilemap

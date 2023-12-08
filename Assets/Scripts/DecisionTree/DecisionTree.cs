@@ -55,10 +55,11 @@ public class DecisionTree : MonoBehaviour
         DecisionTreeNode currentNode = firstNode;
         while (currentNode is Decision)
         {
+            Debug.Log("CurrentNode is a Decision");
             Decision currentDecision = (Decision)currentNode;
             currentNode = currentDecision.GetBranch();
         }
-        Action currentAction = (Action)currentNode;
+        Action currentAction = (Action)currentNode; 
         currentAction.PerformAction();
         //if firstNode is of type Decision, call its function "GetBranch"
         //"GetBranch" returns either another decision or an action

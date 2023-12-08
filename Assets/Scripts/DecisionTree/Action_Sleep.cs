@@ -1,4 +1,5 @@
 
+using System.Collections;
 using UnityEngine;
 
 public class Action_Sleep : Action
@@ -8,7 +9,7 @@ public class Action_Sleep : Action
     GoblinNeeds goblinNeed;
     GameObject goblino; 
 
-    public Action_Sleep()
+    public Action_Sleep(GameObject goblino)
     {
         this.goblino = goblino;
         goblinNeed = this.goblino.GetComponent<GoblinNeeds>();
@@ -16,14 +17,20 @@ public class Action_Sleep : Action
     public override void PerformAction()
     {
 
-
-
-
         GameObject Tent = GameObject.FindGameObjectWithTag("TentTag");
 
-        //goblino.GetComponent<Astar>().PathfindTo(Tent.transform.position);
-        goblino.GetComponent<DecisionTree>().targetPos.position = Tent.transform.position;
-        goblino.GetComponent<Astar>().PathfindTo(goblino.GetComponent<DecisionTree>().targetPos.position);
+        goblino.GetComponent<Astar>().PathfindTo(Tent.transform.position);
+
+
+
+        Debug.Log("Start Wait Time");
+
+       new WaitForSeconds(5);
+
+        Debug.Log("End Wait Time");
+
+        //goblino.GetComponent<DecisionTree>().targetPos.position = Tent.transform.position;
+        //    goblino.GetComponent<Astar>().PathfindTo(goblino.GetComponent<DecisionTree>().targetPos.position);
 
 
 

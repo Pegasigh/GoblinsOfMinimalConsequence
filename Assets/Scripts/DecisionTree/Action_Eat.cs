@@ -10,7 +10,7 @@ public class Action_Eat : Action
     FoodLevels foodlvl;
     GameObject goblino;
 
- public Action_Eat  (FoodLevels foodlvl)
+ public Action_Eat  (FoodLevels foodlvl, GameObject goblino)
     {   
         this.foodlvl = foodlvl;
         this.goblino = goblino;

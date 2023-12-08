@@ -15,7 +15,7 @@ public class Action_Fish : Action
    
       
  
-    public Action_Fish(FoodLevels villagefoodLvl) 
+    public Action_Fish(FoodLevels villagefoodLvl, GameObject goblino) 
     { 
         this.goblino = goblino;
         goblinNeed = this.goblino.GetComponent<GoblinNeeds>();
