@@ -25,7 +25,7 @@ public class Action_Sleep : Action
 
         Debug.Log("Start Wait Time");
 
-       new WaitForSeconds(5);
+       new WaitForSeconds(7);
 
         Debug.Log("End Wait Time");
 

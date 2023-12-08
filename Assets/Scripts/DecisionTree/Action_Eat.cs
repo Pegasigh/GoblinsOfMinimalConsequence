@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Action_Eat : Action
 {
@@ -36,8 +37,11 @@ public class Action_Eat : Action
 
 
         //target to the campfire
-        goblinNeed.Feed(5);
 
+
+            goblinNeed.Feed(5);
+            foodlvl.SubtractFood(5);
+       
 
 
     }

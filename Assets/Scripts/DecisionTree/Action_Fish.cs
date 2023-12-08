@@ -35,7 +35,7 @@ public class Action_Fish : Action
 
         Debug.Log("Start Wait Time");
 
-        new WaitForSeconds(7);
+        new WaitForSeconds(5);
 
         Debug.Log("End Wait Time");
 
