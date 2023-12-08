@@ -31,6 +31,9 @@ public class Astar : MonoBehaviour
 
     private void Start()
     {
+        /* TESTING REMOVE LATER*/
+        Debug.Log("astar start");
+
         //setting navigation map to be one in scene
         navigationMap = GameObject.FindWithTag("NavigationMap").GetComponent<Tilemap>();
 
@@ -61,8 +64,6 @@ public class Astar : MonoBehaviour
         //        path = AStarAlgorithm(getStartPos(), goalPos);
         //    }
         //}
-
-
 
         //actually move the goblin
         moveActor();
@@ -308,20 +309,15 @@ public class Astar : MonoBehaviour
 
             //seek to next pos in path
             seekAI.setTarget(path.Peek() + new Vector3(0.5f, 0.5f, 0));
-            //arriveAI.setTarget(goalPos + new Vector3(0.5f, 0.5f, 0));
+            arriveAI.setTarget(path.Peek() + new Vector3(0.5f, 0.5f, 0));
         }
     }
 
     public void PathfindTo(Vector3 goalPos_)
     {
         goalPos = new Vector3Int((int)goalPos_.x, (int)goalPos_.y, (int)goalPos_.z);
-        path = AStarAlgorithm(getStartPos(), goalPos);
-
- 
+        path = AStarAlgorithm(getStartPos(), goalPos); 
     }
-
-
-
 }
 
 
