@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /* SOURCE: I USED CHATGPT TO HELP ME START WRITING THIS XML SECTION */
@@ -51,7 +52,14 @@ public class DecisionTree : MonoBehaviour
     void Update()
     {
         //TODO: look through decision tree, perform action
-
+        DecisionTreeNode currentNode = firstNode;
+        while (currentNode is Decision)
+        {
+            Decision currentDecision = (Decision)currentNode;
+            currentNode = currentDecision.GetBranch();
+        }
+        Action currentAction = (Action)currentNode;
+        currentAction.PerformAction();
         //if firstNode is of type Decision, call its function "GetBranch"
         //"GetBranch" returns either another decision or an action
         //if it returns a decision, call its function "GetBranch"
@@ -59,8 +67,6 @@ public class DecisionTree : MonoBehaviour
         //call "PerformAction"
 
         //in other words: for as long as "GetBranch" returns a decision, keep calling "GetBranch"
-        
-    
     }
 
     DecisionTreeNode ProcessDecision(XmlNode node)
