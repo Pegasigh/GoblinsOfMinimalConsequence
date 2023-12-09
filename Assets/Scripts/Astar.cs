@@ -8,7 +8,6 @@ public enum TileType {START, END, PATH, BUILDING, WATER}
 [RequireComponent(typeof(SeekAI))]
 public class Astar : MonoBehaviour
 {
-    [SerializeField]
     private Tilemap tilemap;
 
     private Tilemap navigationMap;
@@ -31,11 +30,11 @@ public class Astar : MonoBehaviour
 
     private void Start()
     {
-        /* TESTING REMOVE LATER*/
-        Debug.Log("astar start");
-
         //setting navigation map to be one in scene
         navigationMap = GameObject.FindWithTag("NavigationMap").GetComponent<Tilemap>();
+
+        //setting tilemap
+        tilemap = GameObject.FindWithTag("VisualMap").GetComponent<Tilemap>();
 
         //grabbing it's own SeekAI and ArriveAI
         seekAI = GetComponent<SeekAI>();
@@ -317,6 +316,12 @@ public class Astar : MonoBehaviour
     {
         goalPos = new Vector3Int((int)goalPos_.x, (int)goalPos_.y, (int)goalPos_.z);
         path = AStarAlgorithm(getStartPos(), goalPos); 
+    }
+
+    public bool IsAtDestination()
+    {
+        if (path.Count == 1 && Vector3.Distance(transform.position, path.Peek() + new Vector3(0.5f, 0.5f, 0)) < 0.5f) return true; //is at final destination
+        else return false;
     }
 }
 

@@ -15,12 +15,16 @@ public enum personalities
 
 public class GoblinNeeds : MonoBehaviour
 {
+    [HideInInspector]
     public float hunger;
+    [HideInInspector]
     public float fun;
+    [HideInInspector]
     public float energy;
+    [HideInInspector]
     public float social;
 
-    public float needDecay = 1;
+    public float needDecay;
 
     public personalities personality;
     
@@ -28,10 +32,10 @@ public class GoblinNeeds : MonoBehaviour
     void Start()
     {
         //Set all Needs to 100% on creation
-        hunger = 100;
-        fun = 100;
-        energy = 100;
-        social = 100;
+        hunger = 100.0f;
+        fun = 100.0f;
+        energy = 100.0f;
+        social = 100.0f;
 
         //Give goblin a random personality
         personality = (personalities)Random.Range(0, (int)personalities.COUNT);
@@ -44,45 +48,45 @@ public class GoblinNeeds : MonoBehaviour
         switch (personality) 
         {
             case personalities.EVIL:
-                hunger -= 1.0f * needDecay;
-                fun -= 1.0f * needDecay;
-                energy -= 1.0f * needDecay;
-                social -= 1.0f * needDecay;
+                hunger -= 1.0f * needDecay * Time.deltaTime;
+                fun -= 1.0f * needDecay * Time.deltaTime;
+                energy -= 1.0f * needDecay * Time.deltaTime;
+                social -= 1.0f * needDecay * Time.deltaTime;
                 break;
 
             case personalities.FRIENDLY:
-                hunger -= 1.0f * needDecay;
-                fun -= 1.0f * needDecay;
-                energy -= 1.0f * needDecay;
-                social -= 1.5f * needDecay;
+                hunger -= 1.0f * needDecay * Time.deltaTime;
+                fun -= 1.0f * needDecay * Time.deltaTime;
+                energy -= 1.0f * needDecay * Time.deltaTime;
+                social -= 1.5f * needDecay * Time.deltaTime;
                 break;
 
             case personalities.LAZY:
-                hunger -= 1.0f * needDecay;
-                fun -= 1.0f * needDecay;
-                energy -= 1.5f * needDecay;
-                social -= 1.0f * needDecay;
+                hunger -= 1.0f * needDecay * Time.deltaTime;
+                fun -= 1.0f * needDecay * Time.deltaTime;
+                energy -= 1.5f * needDecay * Time.deltaTime;
+                social -= 1.0f * needDecay * Time.deltaTime;
                 break;
 
             case personalities.SLOB:
-                hunger -= 1.5f * needDecay;
-                fun -= 1.0f * needDecay;
-                energy -= 1.0f * needDecay;
-                social -= 1.0f * needDecay;
+                hunger -= 1.5f * needDecay * Time.deltaTime;
+                fun -= 1.0f * needDecay * Time.deltaTime;
+                energy -= 1.0f * needDecay * Time.deltaTime;
+                social -= 1.0f * needDecay * Time.deltaTime;
                 break;
 
             case personalities.PRODUCTIVE:
-                hunger -= 1.0f * needDecay;
-                fun -= 1.0f * needDecay;
-                energy -= 1.0f * needDecay;
-                social -= 1.0f * needDecay;
+                hunger -= 1.0f * needDecay * Time.deltaTime;
+                fun -= 1.0f * needDecay * Time.deltaTime;
+                energy -= 1.0f * needDecay * Time.deltaTime;
+                social -= 1.0f * needDecay * Time.deltaTime;
                 break;
 
             case personalities.PLAYFUL:
-                hunger -= 1.0f * needDecay;
-                fun -= 1.0f * needDecay;
-                energy -= 1.0f * needDecay;
-                social -= 1.0f * needDecay;
+                hunger -= 1.0f * needDecay * Time.deltaTime;
+                fun -= 1.0f * needDecay * Time.deltaTime;
+                energy -= 1.0f * needDecay * Time.deltaTime;
+                social -= 1.0f * needDecay * Time.deltaTime;
                 break;
         }        
     }

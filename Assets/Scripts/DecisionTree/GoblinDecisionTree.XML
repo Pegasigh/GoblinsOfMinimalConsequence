@@ -10,25 +10,19 @@
 			<True> 
 				<Action>Sleep</Action>
 			</True>
-			<False> 
-				<Decision>NeedsSocial</Decision>
-				<True> 
-					<Action>Socialize</Action>
-				</True>
-				<False> 
-					<Decision>NeedsFun</Decision>
-					<True> 
-						<Decision>IsEvil</Decision>
-						<True> 
-							<Action>FunEvil</Action>
-						</True>
-						<False> 
-							<Action>Fun</Action>
-						</False>
+			<False>
+				<Decision>NeedsFun</Decision>
+				<True>
+					<Decision>IsEvil</Decision>
+					<True>
+						<Action>FunEvil</Action>
 					</True>
-					<False> 
-		
+					<False>
+						<Action>Fun</Action>
 					</False>
+				</True>
+				<False>
+
 				</False>
 			</False>
 		</True>

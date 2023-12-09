@@ -16,11 +16,6 @@ public class ThePit : MonoBehaviour
 
         if(goblin.tag != holderTag)
         {
-
-            if(goblin.GetComponent<SeekAI>().target != null)
-            {
-                Destroy(goblin.GetComponent<SeekAI>().target.gameObject);
-            }
             Destroy(goblin);
         }
     }

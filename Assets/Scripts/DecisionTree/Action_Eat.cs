@@ -17,36 +17,21 @@ public class Action_Eat : Action
         this.goblino = goblino;
         goblinNeed = this.goblino.GetComponent<GoblinNeeds>();
     }
-    public override void PerformAction()
+    public override IEnumerator PerformAction()
     {
-
         Debug.Log("Time for lunch, Crunch MUNCH! (Eat Action being Performed)");
 
         GameObject Campfire = GameObject.FindGameObjectWithTag("CampfireTag");
+        Debug.Log(Campfire.transform.position);
+        goblino.GetComponent<Astar>().PathfindTo(Campfire.transform.position + Vector3.down);
 
-        goblino.GetComponent<Astar>().PathfindTo(Campfire.transform.position);
+        //when we reach the location:
+        while (!goblino.GetComponent<Astar>().IsAtDestination()) yield return null;
 
+        //waiting
+        yield return new WaitForSeconds(3);
 
-        Debug.Log("Start Wait Time");
-
-        new WaitForSeconds(3);
-
-        Debug.Log("End Wait Time");
-
-
-        //goblino.GetComponent<DecisionTree>().targetPos.position = Campfire.transform.position;
-        //goblino.GetComponent<Astar>().PathfindTo(goblino.GetComponent<DecisionTree>().targetPos.position);
-
-
-        //target to the campfire
-
-
-            goblinNeed.Feed(5);
-            foodlvl.SubtractFood(5);
-       
-
-
+        goblinNeed.Feed(5);
+        foodlvl.SubtractFood(5);
     }
-
-
 }

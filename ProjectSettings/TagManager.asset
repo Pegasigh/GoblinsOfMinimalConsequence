@@ -12,6 +12,8 @@ TagManager:
   - ThePit
   - Dragging
   - NOTDragging
+  - VillageInfo
+  - VisualMap
   layers:
   - Default
   - TransparentFX

@@ -123,12 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &973948 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3919171959048894684, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1283574025}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &110191699
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -372,7 +366,7 @@ GameObject:
   - component: {fileID: 191366465}
   m_Layer: 6
   m_Name: VisualMap
-  m_TagString: Untagged
+  m_TagString: VisualMap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4285,7 +4279,7 @@ GameObject:
   - component: {fileID: 1128732333}
   m_Layer: 0
   m_Name: FoodLevelsContainer
-  m_TagString: Untagged
+  m_TagString: VillageInfo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4331,16 +4325,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goblin
       objectReference: {fileID: 0}
-    - target: {fileID: 709866029393078078, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 709866029393078078, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-        type: 3}
-      propertyPath: seekTargetTransformObject
-      value: 
-      objectReference: {fileID: 1792188116}
     - target: {fileID: 1932449462504837019, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4391,58 +4375,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2627221783854203752, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
+    - target: {fileID: 5831117554549646427, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
         type: 3}
-      propertyPath: fun
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2627221783854203752, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-        type: 3}
-      propertyPath: energy
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2627221783854203752, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-        type: 3}
-      propertyPath: hunger
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2627221783854203752, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-        type: 3}
-      propertyPath: social
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4653899794074369867, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-        type: 3}
-      propertyPath: target
+      propertyPath: villageInfo
       value: 
-      objectReference: {fileID: 973948}
-    - target: {fileID: 4653899794074369867, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1128732333}
     - target: {fileID: 5831117554549646427, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
         type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5831117554549646427, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-        type: 3}
-      propertyPath: tiredThreshold
-      value: 1000
+      propertyPath: socialThreshold
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 9204415340304947045, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
         type: 3}
       propertyPath: tilemap
       value: 
       objectReference: {fileID: 191366468}
-    - target: {fileID: 9204415340304947045, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3085648984872388900, guid: 92fc3470808f65c4bb19fc601a3cc4c8, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92fc3470808f65c4bb19fc601a3cc4c8, type: 3}
@@ -4734,12 +4684,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffcfe3de89f387f4e8e3145de2620fc4, type: 3}
---- !u!1 &1792188116 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8563418005584818378, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1283574025}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1854582018
 GameObject:
   m_ObjectHideFlags: 0

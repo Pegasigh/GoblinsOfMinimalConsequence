@@ -1,4 +1,5 @@
 
+using System.Collections;
 using UnityEngine;
 
 public class Action_Fun : Action
@@ -15,39 +16,19 @@ public class Action_Fun : Action
     }
 
     //Can add more functions into these, one for kill one for dance one ofr game and the perform action just randomly selects one. 
-    public override void PerformAction()
+    public override IEnumerator PerformAction()
     {
-        // Randomly pick between Dance and Game
-
-        int funActNum = Random.Range(0, 1); //Randomly selects a number between a min and max range
-
-        if (funActNum == 0)
-        {
-            ActionGame();
-        }
-        if (funActNum == 1) 
-        {
-            ActionDance();
-        }
-
-
-    }
-    public void ActionGame()
-    {
-        //target closest idle goblin.
-        
-
-        goblinNeed.Play(10);
-
-    }
-
-    public void ActionDance()
-    {
+        //dances at campafire
         //target campfire
 
+
+        Debug.Log("Start Wait Time");
+        yield return new WaitForSeconds(3);
+        Debug.Log("End Wait Time");
+
+
         goblinNeed.Play(15);
+
     }
-
-
 }
 

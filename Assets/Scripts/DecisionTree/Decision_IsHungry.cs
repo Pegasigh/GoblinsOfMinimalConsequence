@@ -1,4 +1,6 @@
 
+using System.Diagnostics;
+
 public class Decision_IsHungry : Decision
 {
     private GoblinNeeds goblinInfo;

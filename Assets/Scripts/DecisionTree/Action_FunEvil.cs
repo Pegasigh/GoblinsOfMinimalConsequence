@@ -1,4 +1,5 @@
 
+using System.Collections;
 using UnityEngine;
 public class Action_FunEvil : Action
 {
@@ -13,47 +14,44 @@ public class Action_FunEvil : Action
         this.goblino = goblino;
         goblinNeed = this.goblino.GetComponent<GoblinNeeds>();
     }
-    public override void PerformAction()
+    public override IEnumerator PerformAction()
     {
         // Randomly pick between Dance and Game
 
-        int funActNum = Random.Range(0, 2); //Randomly selects a number between a min and max range
+        int funActNum = Random.Range(0, 1); //Randomly selects a number between a min and max range
 
         if (funActNum == 0)
         {
-            ActionGame();
+            yield return ActionDance();
         }
         if (funActNum == 1)
         {
-            ActionDance();
-        }
-        if (funActNum == 2)
-        {
-            ActionKILL();
+            yield return ActionKILL();
         }
 
 
     }
 
-    public void ActionGame()
-    {
-        //target closest idle goblin. 
-        goblinNeed.Play(10);
-
-    }
-
-    public void ActionDance()
+    public IEnumerator ActionDance()
     {
         //target campfire
+
+
+        Debug.Log("Start Wait Time");
+        yield return new WaitForSeconds(3);
+        Debug.Log("End Wait Time");
 
         goblinNeed.Play(15);
     }
 
-    public void ActionKILL()
+    public IEnumerator ActionKILL()
     {
+        Debug.Log("Start Wait Time");
+        yield return null; //doesn't wait
+        Debug.Log("End Wait Time");
+
         goblinNeed.Play(20);
         //If this is picked, target closest goblin, get up to them, upon touching, DESTROY OTHER GOBLIN
     }
-
 
 }

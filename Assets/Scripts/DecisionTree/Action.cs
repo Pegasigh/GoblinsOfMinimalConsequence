@@ -1,5 +1,5 @@
 
-
+using System.Collections;
 using UnityEngine.Analytics;
 
 public abstract class Action : DecisionTreeNode
@@ -9,8 +9,5 @@ public abstract class Action : DecisionTreeNode
         return this;
     }
 
-    public abstract void PerformAction();
-
-    // Eat, Sleep, Socialize, Dance, Play Game, Fish, Kill
-
+    public abstract IEnumerator PerformAction();
 }

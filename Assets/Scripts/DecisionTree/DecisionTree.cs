@@ -23,9 +23,11 @@ public class DecisionTree : MonoBehaviour
     public float hasFoodThreshold;
     public float hasFoodThreshold_productive;
     public float tiredThreshold;
-    public float socialThreshold;
     public float funThreshold;
 
+    //current action/state
+    Coroutine actionState;
+    bool coroutineIsRunning;
 
     //ref to public transform for targeting
     public Transform targetPos;
@@ -36,8 +38,9 @@ public class DecisionTree : MonoBehaviour
     {
         //set up references
         goblinInfo = gameObject.GetComponent<GoblinNeeds>();
-        //TODO
-        //villageInfo = FindObjectOfType<>
+
+        //set up village food levels reference
+        villageInfo = GameObject.FindGameObjectWithTag("VillageInfo").GetComponent<FoodLevels>();
 
         //load xml file
         XmlDocument xmlDoc = new XmlDocument();
@@ -51,16 +54,6 @@ public class DecisionTree : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //TODO: look through decision tree, perform action
-        DecisionTreeNode currentNode = firstNode;
-        while (currentNode is Decision)
-        {
-            Debug.Log("CurrentNode is a Decision");
-            Decision currentDecision = (Decision)currentNode;
-            currentNode = currentDecision.GetBranch();
-        }
-        Action currentAction = (Action)currentNode; 
-        currentAction.PerformAction();
         //if firstNode is of type Decision, call its function "GetBranch"
         //"GetBranch" returns either another decision or an action
         //if it returns a decision, call its function "GetBranch"
@@ -68,6 +61,21 @@ public class DecisionTree : MonoBehaviour
         //call "PerformAction"
 
         //in other words: for as long as "GetBranch" returns a decision, keep calling "GetBranch"
+
+        if(actionState != null)
+        {
+            if (coroutineIsRunning) return; //if action state isn't done, don't bother looking through decision tree for an action
+        }
+
+        DecisionTreeNode currentNode = firstNode;
+        while (currentNode is Decision decision)
+        {
+            currentNode = decision.GetBranch();
+        }
+        if (currentNode is Action action)
+        {
+            actionState = StartCoroutine(RunCoroutine(action)); //eventually calls action's PerformAction function
+        }
     }
 
     DecisionTreeNode ProcessDecision(XmlNode node)
@@ -91,7 +99,8 @@ public class DecisionTree : MonoBehaviour
                 XmlNode trueNode = currentNode.SelectSingleNode("following-sibling::*[name()='True']");
                 XmlNode falseNode = currentNode.SelectSingleNode("following-sibling::*[name()='False']");
 
-                //process true and flase branches
+
+                //process true and false branches
                 if (trueNode != null) { currentDecision.trueNode = ProcessDecision(trueNode); }
                 if (falseNode != null) { currentDecision.falseNode = ProcessDecision(falseNode); }
 
@@ -112,7 +121,6 @@ public class DecisionTree : MonoBehaviour
         if (type == "IsHungry") return new Decision_IsHungry(goblinInfo, hungerThreshold);
         if (type == "HasEnoughFood") return new Decision_HasEnoughFood(villageInfo, goblinInfo, hasFoodThreshold, hasFoodThreshold_productive);
         if (type == "IsTired") return new Decision_IsTired(goblinInfo, tiredThreshold);
-        if (type == "NeedsSocial") return new Decision_NeedsSocial(goblinInfo, socialThreshold);
         if (type == "NeedsFun") return new Decision_NeedsFun(goblinInfo, funThreshold);
         if (type == "IsEvil") return new Decision_IsEvil(goblinInfo);
 
@@ -121,15 +129,19 @@ public class DecisionTree : MonoBehaviour
 
     Action CreateActionInstance(string type)
     {
-        //TODO: pass in the proper variables so these compile
-
-        //if (type == "Eat") return new Action_Eat();
-        //if (type == "Sleep") return new Action_Sleep();
-        //if (type == "Socialize") return new Action_Socialize();
-        //if (type == "FunEvil") return new Action_FunEvil();
-        //if (type == "Fun") return new Action_Fun();
-        //if (type == "Fish") return new Action_Fish();
+        if (type == "Eat") return new Action_Eat(villageInfo, this.gameObject);
+        if (type == "Sleep") return new Action_Sleep(this.gameObject);
+        if (type == "FunEvil") return new Action_FunEvil(this.gameObject);
+        if (type == "Fun") return new Action_Fun(this.gameObject);
+        if (type == "Fish") return new Action_Fish(villageInfo, this.gameObject);
 
         return null;
+    }
+
+    IEnumerator RunCoroutine(Action action)
+    {
+        coroutineIsRunning = true;
+        yield return action.PerformAction();
+        coroutineIsRunning = false;
     }
 }
