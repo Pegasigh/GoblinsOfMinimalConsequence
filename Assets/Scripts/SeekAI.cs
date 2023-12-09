@@ -13,6 +13,7 @@ public class SeekAI : MonoBehaviour
     void Start()
     {
         bodyScript = GetComponent<Body>();
+        target.parent = null;
     }
 
     // Update is called once per frame
