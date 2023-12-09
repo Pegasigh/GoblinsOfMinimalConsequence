@@ -42,9 +42,6 @@ public class Astar : MonoBehaviour
 
         //defaulting path to be empty
         path = new Stack<Vector3Int>();
-
-        //setting camera
-
     }
 
     void Update()
@@ -87,7 +84,7 @@ public class Astar : MonoBehaviour
         startNode.G = 0;
         openSet.Add(startNode);
 
-
+        //Debug.Log(navigationMap);
 
         //only runs the algorithm if goalPos is an unoccupied tile
         if (!navigationMap.GetTile(goalPos))
@@ -315,7 +312,7 @@ public class Astar : MonoBehaviour
     public void PathfindTo(Vector3 goalPos_)
     {
         goalPos = new Vector3Int((int)goalPos_.x, (int)goalPos_.y, (int)goalPos_.z);
-        path = AStarAlgorithm(getStartPos(), goalPos); 
+        path = AStarAlgorithm(getStartPos(), goalPos);
     }
 
     public bool IsAtDestination()
