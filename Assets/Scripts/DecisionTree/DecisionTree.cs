@@ -62,11 +62,10 @@ public class DecisionTree : MonoBehaviour
 
         //in other words: for as long as "GetBranch" returns a decision, keep calling "GetBranch"
 
-        if(actionState != null)
+        if (actionState != null)
         {
             if (coroutineIsRunning) return; //if action state isn't done, don't bother looking through decision tree for an action
         }
-
         DecisionTreeNode currentNode = firstNode;
         while (currentNode is Decision decision)
         {

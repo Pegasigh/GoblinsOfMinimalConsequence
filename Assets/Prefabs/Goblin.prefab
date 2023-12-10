@@ -257,7 +257,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60785adbda549b547bc37a9ebf0d0648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 0}
   layerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -274,7 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xmlFile: {fileID: 4900000, guid: 69da1de2e3841b146a3d96b7a62e69b2, type: 3}
-  hungerThreshold: 25
+  hungerThreshold: 99
   hasFoodThreshold: 25
   hasFoodThreshold_productive: 25
   tiredThreshold: 25
@@ -296,7 +295,7 @@ MonoBehaviour:
   fun: 50
   energy: 50
   social: 50
-  needDecay: 0.1
+  needDecayPerSec: 1
   personality: 0
 --- !u!114 &5705780796462054938
 MonoBehaviour:

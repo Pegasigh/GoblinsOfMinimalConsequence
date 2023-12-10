@@ -24,8 +24,9 @@ public class GoblinNeeds : MonoBehaviour
     [HideInInspector]
     public float social;
 
-    public float needDecay;
-
+    public float needDecayPerSec;
+    
+    [HideInInspector]
     public personalities personality;
     
     // Start is called before the first frame update
@@ -48,45 +49,45 @@ public class GoblinNeeds : MonoBehaviour
         switch (personality) 
         {
             case personalities.EVIL:
-                hunger -= 1.0f * needDecay * Time.deltaTime;
-                fun -= 1.0f * needDecay * Time.deltaTime;
-                energy -= 1.0f * needDecay * Time.deltaTime;
-                social -= 1.0f * needDecay * Time.deltaTime;
+                hunger -= 1.0f * needDecayPerSec * Time.deltaTime;
+                fun -= 1.0f * needDecayPerSec * Time.deltaTime;
+                energy -= 1.0f * needDecayPerSec * Time.deltaTime;
+                social -= 1.0f * needDecayPerSec * Time.deltaTime;
                 break;
 
             case personalities.FRIENDLY:
-                hunger -= 1.0f * needDecay * Time.deltaTime;
-                fun -= 1.0f * needDecay * Time.deltaTime;
-                energy -= 1.0f * needDecay * Time.deltaTime;
-                social -= 1.5f * needDecay * Time.deltaTime;
+                hunger -= 1.0f * needDecayPerSec * Time.deltaTime;
+                fun -= 1.0f * needDecayPerSec * Time.deltaTime;
+                energy -= 1.0f * needDecayPerSec * Time.deltaTime;
+                social -= 1.5f * needDecayPerSec * Time.deltaTime;
                 break;
 
             case personalities.LAZY:
-                hunger -= 1.0f * needDecay * Time.deltaTime;
-                fun -= 1.0f * needDecay * Time.deltaTime;
-                energy -= 1.5f * needDecay * Time.deltaTime;
-                social -= 1.0f * needDecay * Time.deltaTime;
+                hunger -= 1.0f * needDecayPerSec * Time.deltaTime;
+                fun -= 1.0f * needDecayPerSec * Time.deltaTime;
+                energy -= 1.5f * needDecayPerSec * Time.deltaTime;
+                social -= 1.0f * needDecayPerSec * Time.deltaTime;
                 break;
 
             case personalities.SLOB:
-                hunger -= 1.5f * needDecay * Time.deltaTime;
-                fun -= 1.0f * needDecay * Time.deltaTime;
-                energy -= 1.0f * needDecay * Time.deltaTime;
-                social -= 1.0f * needDecay * Time.deltaTime;
+                hunger -= 1.5f * needDecayPerSec * Time.deltaTime;
+                fun -= 1.0f * needDecayPerSec * Time.deltaTime;
+                energy -= 1.0f * needDecayPerSec * Time.deltaTime;
+                social -= 1.0f * needDecayPerSec * Time.deltaTime;
                 break;
 
             case personalities.PRODUCTIVE:
-                hunger -= 1.0f * needDecay * Time.deltaTime;
-                fun -= 1.0f * needDecay * Time.deltaTime;
-                energy -= 1.0f * needDecay * Time.deltaTime;
-                social -= 1.0f * needDecay * Time.deltaTime;
+                hunger -= 1.0f * needDecayPerSec * Time.deltaTime;
+                fun -= 1.0f * needDecayPerSec * Time.deltaTime;
+                energy -= 1.0f * needDecayPerSec * Time.deltaTime;
+                social -= 1.0f * needDecayPerSec * Time.deltaTime;
                 break;
 
             case personalities.PLAYFUL:
-                hunger -= 1.0f * needDecay * Time.deltaTime;
-                fun -= 1.0f * needDecay * Time.deltaTime;
-                energy -= 1.0f * needDecay * Time.deltaTime;
-                social -= 1.0f * needDecay * Time.deltaTime;
+                hunger -= 1.0f * needDecayPerSec * Time.deltaTime;
+                fun -= 1.0f * needDecayPerSec * Time.deltaTime;
+                energy -= 1.0f * needDecayPerSec * Time.deltaTime;
+                social -= 1.0f * needDecayPerSec * Time.deltaTime;
                 break;
         }        
     }

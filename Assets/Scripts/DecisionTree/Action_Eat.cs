@@ -22,7 +22,6 @@ public class Action_Eat : Action
         Debug.Log("Time for lunch, Crunch MUNCH! (Eat Action being Performed)");
 
         GameObject Campfire = GameObject.FindGameObjectWithTag("CampfireTag");
-        Debug.Log(Campfire.transform.position);
         goblino.GetComponent<Astar>().PathfindTo(Campfire.transform.position + Vector3.down);
 
         //when we reach the location:
