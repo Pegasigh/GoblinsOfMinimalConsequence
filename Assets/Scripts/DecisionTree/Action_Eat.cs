@@ -27,11 +27,18 @@ public class Action_Eat : Action
         //when we reach the location:
         while (!goblino.GetComponent<Astar>().IsAtDestination()) yield return null;
 
+        goblinNeed.Feed(30);
+        Debug.Log("eating");
 
         //waiting
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
 
-        goblinNeed.Feed(5);
-        foodlvl.SubtractFood(5);
+
+        foodlvl.SubtractFood(15);
+        Debug.Log("Goblin Need Hunger: " + goblinNeed.hunger);
+        
+        Debug.Log("Eat Action COMPLETED");
+
+
     }
 }

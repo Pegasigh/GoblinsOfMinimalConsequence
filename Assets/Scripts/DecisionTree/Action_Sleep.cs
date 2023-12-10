@@ -38,9 +38,10 @@ public class Action_Sleep : Action
 
 
         //waiting
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(1);
         
         Debug.Log("Resting");
+        Debug.Log("Goblin Need Energy: " + goblinNeed.energy);
         goblinNeed.Rest();
 
         

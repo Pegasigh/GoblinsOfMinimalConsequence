@@ -44,7 +44,8 @@ public class Action_Fish : Action
         //waiting
         yield return new WaitForSeconds(5);
 
-        villageFood.AddFood(5);
+        villageFood.AddFood(15);
+     
         Debug.Log("Food Added?");
     }
 }
