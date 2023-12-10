@@ -30,10 +30,21 @@ public class Action_Fish : Action
 
 
         GameObject Pond = GameObject.FindGameObjectWithTag("PondTag");
+        Debug.Log(Pond.transform.position);
         goblino.GetComponent<Astar>().PathfindTo(Pond.transform.position + Vector3.down);
 
-        yield return new WaitForSeconds(7);
+        goblino.transform.position = Pond.transform.position;
+        //when we reach the location:
+      //  while (!goblino.GetComponent<Astar>().IsAtDestination()) yield return null;
+        Debug.Log("ARRIVAL");
 
-        villageFood.AddFood(10);
+            
+
+        
+        //waiting
+        yield return new WaitForSeconds(5);
+
+        villageFood.AddFood(5);
+        Debug.Log("Food Added?");
     }
 }

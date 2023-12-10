@@ -4296,7 +4296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4ead912f21d8674b927f0c0339ee5fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodLevel: 10
+  foodLevel: 50000
 --- !u!4 &1128732334
 Transform:
   m_ObjectHideFlags: 0
@@ -4375,11 +4375,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2627221783854203752, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
+        type: 3}
+      propertyPath: needDecay
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5831117554549646427, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
         type: 3}
       propertyPath: villageInfo
       value: 
       objectReference: {fileID: 1128732333}
+    - target: {fileID: 5831117554549646427, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
+        type: 3}
+      propertyPath: tiredThreshold
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 5831117554549646427, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
         type: 3}
       propertyPath: socialThreshold

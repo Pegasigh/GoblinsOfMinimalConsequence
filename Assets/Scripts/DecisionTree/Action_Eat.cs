@@ -28,6 +28,7 @@ public class Action_Eat : Action
         //when we reach the location:
         while (!goblino.GetComponent<Astar>().IsAtDestination()) yield return null;
 
+
         //waiting
         yield return new WaitForSeconds(3);
 

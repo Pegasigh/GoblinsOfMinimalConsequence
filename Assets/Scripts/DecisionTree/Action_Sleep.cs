@@ -20,11 +20,30 @@ public class Action_Sleep : Action
 
 
         GameObject Tent = GameObject.FindGameObjectWithTag("TentTag");
-        goblino.GetComponent<Astar>().PathfindTo(Tent.transform.position + Vector3.down);
 
-        yield return new WaitForSeconds(7);
+        goblino.GetComponent<Astar>().PathfindTo(Tent.transform.position + Vector3.left);
+        Debug.Log(Tent.transform.position);
+
+        //when we reach the location:
+     
+
+      //  goblino.GetComponent<Astar>().PathfindTo(Tent.transform.position + Vector3.down);
+       
+
+
+
+        while (!goblino.GetComponent<Astar>().IsAtDestination()) yield return null;
+        Debug.Log("ON the way");
+
+
+
+        //waiting
+        yield return new WaitForSeconds(10);
         
+        Debug.Log("Resting");
         goblinNeed.Rest();
+
+        
     }
 }
 
