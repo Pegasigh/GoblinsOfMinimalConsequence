@@ -34,10 +34,10 @@ public class GoblinNeeds : MonoBehaviour
     void Start()
     {
         //Set all Needs to 100% on creation
-        //hunger = 100.0f;
-        //fun = 100.0f;
-        //energy = 100.0f;
-        //social = 100.0f;
+        hunger = 100.0f;
+        fun = 100.0f;
+        energy = 100.0f;
+        social = 100.0f;
 
         //Give goblin a random personality
         personality = (personalities)Random.Range(0, (int)personalities.COUNT);
