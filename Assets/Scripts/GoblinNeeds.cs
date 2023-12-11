@@ -35,7 +35,7 @@ public class GoblinNeeds : MonoBehaviour
     {
         //Set all Needs to 100% on creation
         hunger = 100.0f;
-        fun = 100.0f;
+   //     fun = 100.0f;
         energy = 100.0f;
         social = 100.0f;
 
@@ -51,42 +51,42 @@ public class GoblinNeeds : MonoBehaviour
         {
             case personalities.EVIL:
                 hunger -= 1.0f * needDecayPerSec * Time.deltaTime;
-                fun -= 1.0f * needDecayPerSec * Time.deltaTime;
+   //             fun -= 1.0f * needDecayPerSec * Time.deltaTime;
                 energy -= 1.0f * needDecayPerSec * Time.deltaTime;
                 social -= 1.0f * needDecayPerSec * Time.deltaTime;
                 break;
 
             case personalities.FRIENDLY:
                 hunger -= 1.0f * needDecayPerSec * Time.deltaTime;
-                fun -= 1.0f * needDecayPerSec * Time.deltaTime;
+     //           fun -= 1.0f * needDecayPerSec * Time.deltaTime;
                 energy -= 1.0f * needDecayPerSec * Time.deltaTime;
                 social -= 1.5f * needDecayPerSec * Time.deltaTime;
                 break;
 
             case personalities.LAZY:
                 hunger -= 1.0f * needDecayPerSec * Time.deltaTime;
-                fun -= 1.0f * needDecayPerSec * Time.deltaTime;
+      //          fun -= 1.0f * needDecayPerSec * Time.deltaTime;
                 energy -= 1.5f * needDecayPerSec * Time.deltaTime;
                 social -= 1.0f * needDecayPerSec * Time.deltaTime;
                 break;
 
             case personalities.SLOB:
                 hunger -= 1.5f * needDecayPerSec * Time.deltaTime;
-                fun -= 1.0f * needDecayPerSec * Time.deltaTime;
+       //         fun -= 1.0f * needDecayPerSec * Time.deltaTime;
                 energy -= 1.0f * needDecayPerSec * Time.deltaTime;
                 social -= 1.0f * needDecayPerSec * Time.deltaTime;
                 break;
 
             case personalities.PRODUCTIVE:
                 hunger -= 1.0f * needDecayPerSec * Time.deltaTime;
-                fun -= 1.0f * needDecayPerSec * Time.deltaTime;
+       //         fun -= 1.0f * needDecayPerSec * Time.deltaTime;
                 energy -= 1.0f * needDecayPerSec * Time.deltaTime;
                 social -= 1.0f * needDecayPerSec * Time.deltaTime;
                 break;
 
             case personalities.PLAYFUL:
                 hunger -= 1.0f * needDecayPerSec * Time.deltaTime;
-                fun -= 1.0f * needDecayPerSec * Time.deltaTime;
+       //         fun -= 1.0f * needDecayPerSec * Time.deltaTime;
                 energy -= 1.0f * needDecayPerSec * Time.deltaTime;
                 social -= 1.0f * needDecayPerSec * Time.deltaTime;
                 break;
@@ -101,7 +101,7 @@ public class GoblinNeeds : MonoBehaviour
 
     public void Play(int value)
     {
-        fun += value;
+   //     fun += value;
     }
     
     public void Talk(int value)
@@ -114,7 +114,8 @@ public class GoblinNeeds : MonoBehaviour
         energy += 50.0f;
     }
 
-    
-
-
+    //internal void fun(int v)
+    //{
+    //    throw new System.NotImplementedException();
+    //}
 }
