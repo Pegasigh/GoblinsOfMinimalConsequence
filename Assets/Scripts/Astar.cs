@@ -295,7 +295,6 @@ public class Astar : MonoBehaviour
     {
         if(path.Count >= 1)
         {
-            Debug.Log("moving goblin");
             //if at pos, remove it from path
             if (Vector3.Distance(transform.position, path.Peek() + new Vector3(0.5f, 0.5f, 0)) < 0.5f) //checks if it's close enough
             {
@@ -326,6 +325,16 @@ public class Astar : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public bool PosIsOccupied(Vector3 pos_)
+    {
+        //only runs if pos_ is an occupied tile
+        if (navigationMap.GetTile(new Vector3Int((int)pos_.x, (int)pos_.y, (int)pos_.z)))
+        {
+            return true;
+        }
+        return false;
     }
 }
 

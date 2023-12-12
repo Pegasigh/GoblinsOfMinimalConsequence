@@ -4397,40 +4397,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2627221783854203752, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-        type: 3}
-      propertyPath: fun
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2627221783854203752, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-        type: 3}
-      propertyPath: energy
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2627221783854203752, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-        type: 3}
-      propertyPath: hunger
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2627221783854203752, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-        type: 3}
-      propertyPath: social
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2627221783854203752, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-        type: 3}
-      propertyPath: needDecayPerSec
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4653899794074369867, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
         type: 3}
       propertyPath: m_Enabled
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4653899794074369867, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-        type: 3}
-      propertyPath: innerRadius
-      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5831117554549646427, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
         type: 3}
@@ -4439,33 +4409,8 @@ PrefabInstance:
       objectReference: {fileID: 1128732333}
     - target: {fileID: 5831117554549646427, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
         type: 3}
-      propertyPath: funThreshold
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5831117554549646427, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-        type: 3}
-      propertyPath: tiredThreshold
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5831117554549646427, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-        type: 3}
-      propertyPath: hungerThreshold
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5831117554549646427, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-        type: 3}
       propertyPath: socialThreshold
       value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 5831117554549646427, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-        type: 3}
-      propertyPath: hasFoodThreshold
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 5831117554549646427, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
-        type: 3}
-      propertyPath: hasFoodThreshold_productive
-      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 9204415340304947045, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
         type: 3}
