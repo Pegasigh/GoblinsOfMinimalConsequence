@@ -14,6 +14,8 @@ TagManager:
   - NOTDragging
   - VillageInfo
   - VisualMap
+  - RockTag
+  - WanderPointTag
   layers:
   - Default
   - TransparentFX

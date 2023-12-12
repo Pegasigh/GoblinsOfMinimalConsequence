@@ -114,6 +114,8 @@ public class GoblinNeeds : MonoBehaviour
         energy += 50.0f;
     }
 
+
+
     //internal void fun(int v)
     //{
     //    throw new System.NotImplementedException();
