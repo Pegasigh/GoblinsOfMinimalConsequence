@@ -133,6 +133,7 @@ public class DecisionTree : MonoBehaviour
         if (type == "FunEvil") return new Action_FunEvil(this.gameObject);
         if (type == "Fun") return new Action_Fun(this.gameObject);
         if (type == "Fish") return new Action_Fish(villageInfo, this.gameObject);
+        if (type == "Wander") return new Action_Wander(this.gameObject);
 
         return null;
     }

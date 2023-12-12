@@ -22,7 +22,7 @@
 					</False>
 				</True>
 				<False>
-
+					<Action>Wander</Action>
 				</False>
 			</False>
 		</True>
