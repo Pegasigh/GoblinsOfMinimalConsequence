@@ -18,30 +18,19 @@ public class Action_Wander : Action
     {
         Debug.Log("Wanderer, I'm a Wanderer");
 
+        //finding a random point
+        float posx = Random.Range(-9, 9) + 0.5f;
+        float posy = Random.Range(-5, 5) + 0.5f;
+        Vector3 newpositon = new Vector3(posx, posy, 0);
 
-        GameObject WanderPoint = GameObject.FindGameObjectWithTag("WanderPointTag");
+        //pathfinding to the point
+        goblino.GetComponent<Astar>().PathfindTo(newpositon + Vector3.left);
 
-        goblino.GetComponent<Astar>().PathfindTo(WanderPoint.transform.position + Vector3.left);
-        Debug.Log(WanderPoint.transform.position);
-
-        //when we reach the location:
-
-
-        //  goblino.GetComponent<Astar>().PathfindTo(Tent.transform.position + Vector3.down);
-
-
-
-
+        //returning early if not yet at destination
         while (!goblino.GetComponent<Astar>().IsAtDestination()) yield return null;
-        Debug.Log("ON the way");
 
-
-
-        //waiting
+        //waiting at destination
         yield return new WaitForSeconds(1);
-
-
-
     }
 }
 

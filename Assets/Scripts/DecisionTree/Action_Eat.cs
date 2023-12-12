@@ -21,22 +21,25 @@ public class Action_Eat : Action
     {
         Debug.Log("Time for lunch, Crunch MUNCH! (Eat Action being Performed)");
 
+        //finding any campfire
         GameObject Campfire = GameObject.FindGameObjectWithTag("CampfireTag");
+
+        //pathfinding to found campfire
         goblino.GetComponent<Astar>().PathfindTo(Campfire.transform.position + Vector3.down);
 
-        //when we reach the location:
+        //returning early if not yet at destination
         while (!goblino.GetComponent<Astar>().IsAtDestination()) yield return null;
 
-        goblinNeed.Feed(30);
         Debug.Log("eating");
 
-        //waiting
+        //waiting at the destination
         yield return new WaitForSeconds(1);
 
-
+        //eating is done, changing hunger and village food levels
+        goblinNeed.Feed(30);
         foodlvl.SubtractFood(15);
-        Debug.Log("Goblin Need Hunger: " + goblinNeed.hunger);
-        
+
+        Debug.Log("Goblin Need Hunger: " + goblinNeed.hunger);        
         Debug.Log("Eat Action COMPLETED");
 
 

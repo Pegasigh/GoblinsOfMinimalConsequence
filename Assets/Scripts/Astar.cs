@@ -84,8 +84,6 @@ public class Astar : MonoBehaviour
         startNode.G = 0;
         openSet.Add(startNode);
 
-        //Debug.Log(navigationMap);
-
         //only runs the algorithm if goalPos is an unoccupied tile
         if (!navigationMap.GetTile(goalPos))
         {
@@ -139,7 +137,7 @@ public class Astar : MonoBehaviour
                 closedSet.Add(current);
                 openSet.Remove(current);
             }
-        }
+        }        
             
         //no path found, basically just have goblin stay where he is
         result.Push(startPos);
@@ -295,17 +293,20 @@ public class Astar : MonoBehaviour
 
     private void moveActor()
     {
-        if(path.Count > 1)
+        if(path.Count >= 1)
         {
+            Debug.Log("moving goblin");
             //if at pos, remove it from path
             if (Vector3.Distance(transform.position, path.Peek() + new Vector3(0.5f, 0.5f, 0)) < 0.5f) //checks if it's close enough
             {
                 path.Pop();
             }
-
-            //seek to next pos in path
-            seekAI.setTarget(path.Peek() + new Vector3(0.5f, 0.5f, 0));
-            arriveAI.setTarget(path.Peek() + new Vector3(0.5f, 0.5f, 0));
+            else
+            {
+                //seek to next pos in path
+                seekAI.setTarget(path.Peek() + new Vector3(0.5f, 0.5f, 0));
+                arriveAI.setTarget(path.Peek() + new Vector3(0.5f, 0.5f, 0));
+            }
         }
     }
 
@@ -315,10 +316,16 @@ public class Astar : MonoBehaviour
         path = AStarAlgorithm(getStartPos(), goalPos);
     }
 
-    public bool IsAtDestination()
+    public bool IsAtDestination() //bug
     {
-        if (path.Count == 1 && Vector3.Distance(transform.position, path.Peek() + new Vector3(0.5f, 0.5f, 0)) < 0.5f) return true; //is at final destination
-        else return false;
+        if (path.Count == 0)
+        {
+            return true; //is at final destination
+        }
+        else
+        {
+            return false;
+        }
     }
 }
 

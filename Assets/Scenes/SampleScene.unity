@@ -3275,7 +3275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &260220134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3288,7 +3288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e0fe7ba6bbacb949b5a757c5506fce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goblinToTrack: {fileID: 0}
+  goblinToTrack: {fileID: 409978513}
   grid: {fileID: 1854582019}
   tilemap: {fileID: 1600151720}
   tile: {fileID: 11400000, guid: 07773148b966c1f4b974e76875ee7623, type: 2}
@@ -3315,6 +3315,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &409978513 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9204415340304947045, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1283574025}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60785adbda549b547bc37a9ebf0d0648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -4330,15 +4342,20 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 709866029393078078, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1932449462504837019, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.02
+      value: -0.4
       objectReference: {fileID: 0}
     - target: {fileID: 1932449462504837019, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.014321
+      value: 0.42
       objectReference: {fileID: 0}
     - target: {fileID: 1932449462504837019, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
         type: 3}
@@ -4405,6 +4422,16 @@ PrefabInstance:
       propertyPath: needDecayPerSec
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4653899794074369867, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4653899794074369867, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
+        type: 3}
+      propertyPath: innerRadius
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 5831117554549646427, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
         type: 3}
       propertyPath: villageInfo
@@ -4413,7 +4440,7 @@ PrefabInstance:
     - target: {fileID: 5831117554549646427, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
         type: 3}
       propertyPath: funThreshold
-      value: 0
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5831117554549646427, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
         type: 3}
@@ -4423,7 +4450,7 @@ PrefabInstance:
     - target: {fileID: 5831117554549646427, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
         type: 3}
       propertyPath: hungerThreshold
-      value: 95
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5831117554549646427, guid: 92fc3470808f65c4bb19fc601a3cc4c8,
         type: 3}
@@ -4571,96 +4598,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1854582020}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1646332517
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1646332519}
-  - component: {fileID: 1646332520}
-  - component: {fileID: 1646332521}
-  m_Layer: 0
-  m_Name: WanderPoint
-  m_TagString: WanderPointTag
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1646332519
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1646332517}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.15, y: 0.06, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1646332520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1646332517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e519f46177baa8e4d809b64865af08f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!61 &1646332521
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1646332517}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.1}
-  m_EdgeRadius: 0
 --- !u!1001 &1741438465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4956,7 +4893,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 1646332519}
   - {fileID: 4226664763674202225}
   - {fileID: 1854582020}
   - {fileID: 1741438465}
