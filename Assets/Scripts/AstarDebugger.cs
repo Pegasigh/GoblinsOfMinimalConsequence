@@ -44,8 +44,8 @@ public class AstarDebugger : MonoBehaviour
 
     private void Update()
     {
-        //checking mouse click to only update debug visual when mouse is clicked
-        if (Input.GetMouseButtonDown(0))
+        //checking the "I" Key to only update debug visual when pressed
+        if (Input.GetKeyDown(KeyCode.I))
         {
             Stack<Vector3Int> path = goblinToTrack.AStarAlgorithm(goblinToTrack.getStartPos(), goblinToTrack.getGoalPos(), out var openSet, out var closedSet);
             CreateTiles(openSet, closedSet, goblinToTrack.getStartPos(), goblinToTrack.getGoalPos(), path);
